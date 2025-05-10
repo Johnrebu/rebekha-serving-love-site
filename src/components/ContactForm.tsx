@@ -1,10 +1,10 @@
-
 import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Phone, Mail, MapPin, Clock } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 
 export default function ContactForm() {
   const { toast } = useToast();
@@ -23,17 +23,28 @@ export default function ContactForm() {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
   
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Simulate form submission
-    setTimeout(() => {
-      setIsSubmitting(false);
+    try {
+      // Send email notification using the edge function
+      const { data, error } = await supabase.functions.invoke('send-email', {
+        body: {
+          type: 'contact',
+          formData
+        }
+      });
+      
+      if (error) throw new Error(error.message);
+      
+      // Show success toast
       toast({
         title: "Message Sent!",
         description: "Thank you for contacting us. We'll get back to you shortly.",
       });
+      
+      // Reset form
       setFormData({
         name: '',
         email: '',
@@ -41,7 +52,16 @@ export default function ContactForm() {
         subject: '',
         message: ''
       });
-    }, 1500);
+    } catch (error) {
+      console.error("Error sending message:", error);
+      toast({
+        title: "Error",
+        description: "There was a problem sending your message. Please try again later.",
+        variant: "destructive"
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -134,6 +154,7 @@ export default function ContactForm() {
             </form>
           </div>
           
+          {/* Contact Information - Updated with correct email and phone */}
           <div>
             <h3 className="font-serif text-2xl font-semibold mb-6 text-burgundy">Contact Information</h3>
             
@@ -156,7 +177,7 @@ export default function ContactForm() {
                 <div>
                   <h4 className="font-medium">Phone</h4>
                   <p className="text-gray-600 mt-1">
-                    <a href="tel:+919445435102" className="hover:text-burgundy">+91 94454 35102</a>
+                    <a href="tel:+919445435102" className="hover:text-burgundy">+91 9445435102</a>
                   </p>
                 </div>
               </div>

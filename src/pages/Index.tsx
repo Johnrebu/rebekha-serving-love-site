@@ -10,6 +10,7 @@ import Gallery from '../components/Gallery';
 import ContactForm from '../components/ContactForm';
 import Footer from '../components/Footer';
 import BookingModal from '../components/BookingModal';
+import { Toaster } from "@/components/ui/toaster"; // Import Toaster for notifications
 
 // Add global styles for consistent section padding
 import '../styles/global.css';
@@ -40,6 +41,7 @@ const Index = () => {
         isOpen={isBookingModalOpen} 
         onClose={handleCloseBookingModal} 
       />
+      <Toaster /> {/* Add the Toaster component for notifications */}
     </div>
   );
 };

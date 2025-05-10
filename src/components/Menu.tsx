@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
@@ -139,21 +138,24 @@ export default function Menu() {
       ? menuItems.filter(item => item.isVeg) 
       : menuItems.filter(item => !item.isVeg);
 
+  // Function to generate a simple PDF menu and trigger download
   const handleDownloadMenu = () => {
-    // In a real implementation, this would download a PDF file
-    // For now, let's simulate the download with a toast notification
-    toast({
-      title: "Menu Downloaded!",
-      description: "Thank you for downloading our full menu. Enjoy exploring our delicious offerings!",
-    });
-    
-    // Create a dummy PDF link - in a real implementation, this would be a real PDF file
+    // Create a hidden link element that simulates downloading a PDF
     const link = document.createElement('a');
-    link.href = '#'; // This would be the URL to your actual menu PDF
+    
+    // In a real implementation, this would be a server URL to a generated PDF file
+    // For demo purposes, we're creating a data URL
+    link.href = 'data:application/pdf;base64,JVBERi0xLjMKJcTl8uXrCjMgMCBvYmoKPDwgL0ZpbHRlciAvRmxhdGVEZWNvZGUgL0xlbmd0aCAxNDcgPj4Kc3RyZWFtCnicXY7RCsIwDEX3+YoMtgr2D7aCH+BDnQMfYHQdgts0XQv+vdlaajiEe09yAkQIsF1uH7m4cTzho3iWgPPojhG2YCMqJQcbYX9SpKxWL0/MyjP8mVYzdjl5HcrNZoVigkbZgHJQGBFKj1ChPPwt1CfYpRgSLhGfPuerNaNuCnoaG60jXlZuUmY4bXhb5xAllRoqlBpq0A30KWUCZU4KZW5kc3RyZWFtCmVuZG9iagoxIDAgb2JqCjw8IC9UeXBlIC9QYWdlIC9QYXJlbnQgMiAwIFIgL1Jlc291cmNlcyA0IDAgUiAvQ29udGVudHMgMyAwIFIgPj4KZW5kb2JqCjQgMCBvYmoKPDwgL1Byb2NTZXQgWyAvUERGIC9UZXh0IF0gL0NvbG9yU3BhY2UgPDwgL0NzMSA1IDAgUiA+PiAvRm9udCA8PCAvVFQxIDYgMCBSID4+ID4+CmVuZG9iago3IDAgb2JqCjw8IC9OMSAvRGV2aWNlR3JheSA+PgplbmRvYmoKOCAwIG9iago8PCAvTGVuZ3RoIDI0NiA+PgpzdHJlYW0KL0NJREluaXQgL1Byb2NTZXQgZmluZHJlc291cmNlIGJlZ2luIDEyIGRpY3QgYmVnaW4gYmVnaW5jbWFwIC9DSURTeXN0ZW1JbmZvIDw8IC9SZWdpc3RyeSAoQWRvYmUpIC9PcmRlcmluZyAoVUNTKSAvU3VwcGxlbWVudCAwID4+IGRlZiAvQ01hcE5hbWUgL0Fkb2JlLUlkZW50aXR5LVVDUyBkZWYgL0NNYXBUeXBlIDIgZGVmIDEgYmVnaW5jb2Rlc3BhY2VyYW5nZSA8MDAwMD4gPEZGRkY+IGVuZGNvZGVzcGFjZXJhbmdlIDEgYmVnaW5iZnJhbmdlIDxFMDAzPjwwMDVDPiA8RTBBMz4gZW5kYmZyYW5nZSBlbmRjbWFwIENNYXBOYW1lIGN1cnJlbnRkaWN0IC9DTWFwIGRlZmluZXJlc291cmNlIHBvcCBlbmQgZW5kCmVuZHN0cmVhbQplbmRvYmoKMTAgMCBvYmoKPDwgL1R5cGUgL0ZvbnREZXNjcmlwdG9yIC9Gb250TmFtZSAvS1BYRlFEK0hlbHZldGljYSAvRmxhZ3MgMzIgL0ZvbnRCQm94IFstOTUxIC00ODEgMTQ0NSAxMTIyXSAvSXRhbGljQW5nbGUgMCAvQXNjZW50IDc3MCAvRGVzY2VudCAtMjMwIC9DYXBIZWlnaHQgNzE3IC9TdGVtViA5OCAvTGVhZGluZyAzMyAvWEhlaWdodCAyMjAgL1N0ZW1IIDg1IC9BdmdXaWR0aCAQ0QgL01heFdpZHRoIDExMTMgL0ZvbnRGaWxlMiAyMyAwIFIgPj4KZW5kb2JqCjExIDAgb2JqCjw8IC9UeXBlIC9Gb250IC9TdWJ0eXBlIC9DSURGb250VHlwZTIgL0Jhc2VGb250IC9UVDEgL0ZvbnREZXNjcmlwdG9yIDEwIDAgUiAvV1sgMCAgNzE4XSAzIFs5MThdIF0gL0NJRHN5c3RlbUluZm8gOCAwIFIgL0ZJRC9JUEF1dGggPj4KZW5kb2JqCjYgMCBvYmoKPDwgL1R5cGUgL0ZvbnQgL1N1YnR5cGUgL1R5cGUwIC9CYXNlRm9udCAvVFQxIC9FbmNvZGluZyAvSWRlbnRpdHktSCAvRGVzY2VuZGFudEZvbnRzIFsxMSAwIFJdIC9Ub1VuaWNvZGUgOCAwIFIgPj4KZW5kb2JqCjUgMCBvYmoKWyAvSUNDQmFzZWQgNyAwIFIgXQplbmRvYmoKMiAwIG9iago8PCAvVHlwZSAvUGFnZXMgL01lZGlhQm94IFswIDAgNjEyIDc5Ml0gL0NvdW50IDEgL0tpZHMgWyAxIDAgUiBdID4+CmVuZG9iagoxMiAwIG9iago8PCAvVHlwZSAvQ2F0YWxvZyAvUGFnZXMgMiAwIFIgPj4KZW5kb2JqCjEzIDAgb2JqCigoUmViZWtoYSBDYXRlcnMgTWVudSAtIFdlIHNlcnZlIGEgdmFyaWV0eSBvZiBkZWxpY2lvdXMgY3Vpc2luZSB0byBtYWtlIHlvdXIgZXZlbnRzIHNwZWNpYWwuKSkKZW5kb2JqCjE0IDAgb2JqCihgRHVtbXkgUERGIGZvciBGb29kIE1lbnVzKQplbmRvYmoKMTUgMCBvYmoKKERlbW9uc3RyYXRpb24pCmVuZG9iagoxNiAwIG9iagooaHR0cHM6Ly93d3cucmViZWtoYWNhdGVycy5jb20pCmVuZG9iagoxNyAwIG9iagooUmViZWtoYSBDYXRlcnMgTWVudSkKZW5kb2JqCjE4IDAgb2JqCihBZG9iZSBJbGx1c3RyYXRvciBDUzYgKE1hY2ludG9zaCkpCmVuZG9iagoxOSAwIG9iagooRDoyMDIyMTEwOTEyNDM1OSswMicwMCcpCmVuZG9iagoyMCAwIG9iagooKQplbmRvYmoKMjEgMCBvYmoKWyAoKSBdCmVuZG9iagoyMiAwIG9iago8PCAvUHJvZHVjZXIgMjMgMCBSIC9DcmVhdG9yIDI0IDAgUiAvQ3JlYXRpb25EYXRlIDI1IDAgUiAvTW9kRGF0ZSAyNSAwIFIgL1RpdGxlIDI2IDAgUiAvQXV0aG9yIDI3IDAgUiAvU3ViamVjdCAyOCAwIFIgL0tleXdvcmRzIDI5IDAgUiA+PgplbmRvYmoKeHJlZgowIDMwCjAwMDAwMDAwMDAgNjU1MzUgZiAKMDAwMDAwMDI1MiAwMDAwMCBuIAowMDAwMDAxNTM5IDAwMDAwIG4gCjAwMDAwMDAwMTUgMDAwMDAgbiAKMDAwMDAwMDMzOSAwMDAwMCBuIAowMDAwMDAxNTEzIDAwMDAwIG4gCjAwMDAwMDEzOTggMDAwMDAgbiAKMDAwMDAwMDQzOCAwMDAwMCBuIAowMDAwMDAwNDc5IDAwMDAwIG4gCjAwMDAwMDAwMDAgMDAwMDAgbiAKMDAwMDAwMDc3NCAwMDAwMCBuIAowMDAwMDAxMDgyIDAwMDAwIG4gCjAwMDAwMDE2MjIgMDAwMDAgbiAKMDAwMDAwMTY3MiAwMDAwMCBuIAowMDAwMDAxNzg1IDAwMDAwIG4gCjAwMDAwMDE4MjYgMDAwMDAgbiAKMDAwMDAwMTg1OSAwMDAwMCBuIAowMDAwMDAxOTA3IDAwMDAwIG4gCjAwMDAwMDE5NDMgMDAwMDAgbiAKMDAwMDAwMTk4NiAwMDAwMCBuIAowMDAwMDAyMDI2IDAwMDAwIG4gCjAwMDAwMDIwNDYgMDAwMDAgbiAKMDAwMDAwMjA3NCAwMDAwMCBuIAowMDAwMDAwMDAwIDAwMDAwIG4gCjAwMDAwMDAwMDAgMDAwMDAgbiAKMDAwMDAwMDAwMCAwMDAwMCBuIAowMDAwMDAwMDAwIDAwMDAwIG4gCjAwMDAwMDAwMDAgMDAwMDAgbiAKMDAwMDAwMDAwMCAwMDAwMCBuIAowMDAwMDAwMDAwIDAwMDAwIG4gCnRyYWlsZXIKPDwgL1NpemUgMzAgL1Jvb3QgMTIgMCBSIC9JbmZvIDIyIDAgUiAvSUQgWyA8ZjBlMjE2ZmViMjQ2NjI3MTc5MDE0ZGQ5N2FlNzYzYjU+IDxmMGUyMTZmZWIyNDY2MjcxNzkwMTRkZDk3YWU3NjNiNT4gXSA+PgpzdGFydHhyZWYKMjIxMQolJUVPRgo='; 
+    
     link.download = 'rebekha-caters-menu.pdf';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
+    
+    toast({
+      title: "Menu Downloaded!",
+      description: "Thank you for downloading our full menu. Enjoy exploring our delicious offerings!",
+    });
   };
 
   return (

@@ -57,7 +57,7 @@ export default function Footer() {
             </ul>
           </div>
           
-          {/* Contact Info */}
+          {/* Contact Info - Updated email and phone */}
           <div>
             <h3 className="text-xl font-serif font-semibold mb-6">Contact Us</h3>
             <ul className="space-y-4">
@@ -68,7 +68,7 @@ export default function Footer() {
               <li className="flex items-center">
                 <Phone className="mr-3 h-6 w-6 text-burgundy" />
                 <a href="tel:+919445435102" className="text-gray-300 hover:text-white transition-colors">
-                  +91 94454 35102
+                  +91 9445435102
                 </a>
               </li>
               <li className="flex items-center">

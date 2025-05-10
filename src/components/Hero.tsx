@@ -5,14 +5,14 @@ import { Button } from "@/components/ui/button";
 export default function Hero({ onBookNowClick }: { onBookNowClick: () => void }) {
   return (
     <section id="home" className="relative min-h-screen flex items-center overflow-hidden">
-      {/* Background Image */}
+      {/* Background Image - Updated with a more stunning food-related background */}
       <div className="absolute inset-0 z-0">
         <img 
-          src="https://images.unsplash.com/photo-1566737236500-c8ac43014a67?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" 
+          src="https://images.unsplash.com/photo-1555244162-803834f70033?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" 
           alt="Catering table" 
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-black/50"></div>
+        <div className="absolute inset-0 bg-black/60"></div>
       </div>
 
       <div className="container mx-auto px-4 md:px-6 relative z-10 mt-16">
@@ -42,7 +42,7 @@ export default function Hero({ onBookNowClick }: { onBookNowClick: () => void })
             </Button>
             <Button
               variant="outline"
-              className="border-2 border-white text-white hover:bg-white/10 px-8 py-6 text-lg"
+              className="border-2 border-white bg-white/20 text-white hover:bg-white/30 px-8 py-6 text-lg font-medium"
               onClick={() => document.getElementById('menu')?.scrollIntoView({ behavior: 'smooth' })}
             >
               Explore Our Menu

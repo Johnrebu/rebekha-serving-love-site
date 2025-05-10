@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
@@ -7,6 +6,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 
 type BookingModalProps = {
   isOpen: boolean;
@@ -37,17 +37,26 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
   
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Simulate form submission
-    setTimeout(() => {
-      setIsSubmitting(false);
+    try {
+      // Send email notification using the edge function
+      const { data, error } = await supabase.functions.invoke('send-email', {
+        body: {
+          type: 'booking',
+          formData
+        }
+      });
+      
+      if (error) throw new Error(error.message);
+      
       toast({
         title: "Booking Request Sent!",
         description: "We will contact you shortly to confirm your booking details.",
       });
+      
       onClose();
       setFormData({
         name: '',
@@ -59,7 +68,16 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
         guestCount: '',
         additionalInfo: ''
       });
-    }, 1500);
+    } catch (error) {
+      console.error("Error submitting booking:", error);
+      toast({
+        title: "Error",
+        description: "There was a problem submitting your booking. Please try again later.",
+        variant: "destructive"
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   // Tomorrow's date for min date in date picker
