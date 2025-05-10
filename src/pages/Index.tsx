@@ -1,12 +1,42 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+
+import React, { useState } from 'react';
+import Header from '../components/Header';
+import Hero from '../components/Hero';
+import AboutUs from '../components/AboutUs';
+import Menu from '../components/Menu';
+import EventsServices from '../components/EventsServices';
+import Testimonials from '../components/Testimonials';
+import Gallery from '../components/Gallery';
+import ContactForm from '../components/ContactForm';
+import Footer from '../components/Footer';
+import BookingModal from '../components/BookingModal';
 
 const Index = () => {
+  const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
+
+  const handleOpenBookingModal = () => {
+    setIsBookingModalOpen(true);
+  };
+
+  const handleCloseBookingModal = () => {
+    setIsBookingModalOpen(false);
+  };
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-gray-600">Start building your amazing project here!</p>
-      </div>
+    <div className="min-h-screen">
+      <Header onBookNowClick={handleOpenBookingModal} />
+      <Hero onBookNowClick={handleOpenBookingModal} />
+      <AboutUs />
+      <Menu />
+      <EventsServices onBookNowClick={handleOpenBookingModal} />
+      <Testimonials />
+      <Gallery />
+      <ContactForm />
+      <Footer />
+      <BookingModal 
+        isOpen={isBookingModalOpen} 
+        onClose={handleCloseBookingModal} 
+      />
     </div>
   );
 };
