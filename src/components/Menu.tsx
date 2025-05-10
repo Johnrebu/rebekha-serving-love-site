@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
+import { useToast } from "@/hooks/use-toast";
 
 // Menu item type
 type MenuItem = {
@@ -129,6 +130,7 @@ const menuItems: MenuItem[] = [
 ];
 
 export default function Menu() {
+  const { toast } = useToast();
   const [activeTab, setActiveTab] = useState("all");
   
   const filteredMenu = activeTab === "all" 
@@ -136,6 +138,23 @@ export default function Menu() {
     : activeTab === "veg" 
       ? menuItems.filter(item => item.isVeg) 
       : menuItems.filter(item => !item.isVeg);
+
+  const handleDownloadMenu = () => {
+    // In a real implementation, this would download a PDF file
+    // For now, let's simulate the download with a toast notification
+    toast({
+      title: "Menu Downloaded!",
+      description: "Thank you for downloading our full menu. Enjoy exploring our delicious offerings!",
+    });
+    
+    // Create a dummy PDF link - in a real implementation, this would be a real PDF file
+    const link = document.createElement('a');
+    link.href = '#'; // This would be the URL to your actual menu PDF
+    link.download = 'rebekha-caters-menu.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
 
   return (
     <section id="menu" className="section-padding bg-cream py-20">
@@ -215,7 +234,10 @@ export default function Menu() {
           <p className="text-gray-600 mb-6">
             Explore our full menu options or request custom dishes for your special event.
           </p>
-          <Button className="bg-burgundy hover:bg-burgundy/90 text-white font-medium px-6 py-2">
+          <Button 
+            onClick={handleDownloadMenu}
+            className="bg-burgundy hover:bg-burgundy/90 text-white font-medium px-6 py-2"
+          >
             Download Full Menu
           </Button>
         </div>

@@ -156,7 +156,7 @@ export default function ContactForm() {
                 <div>
                   <h4 className="font-medium">Phone</h4>
                   <p className="text-gray-600 mt-1">
-                    <a href="tel:+919876543210" className="hover:text-burgundy">+91 98765 43210</a>
+                    <a href="tel:+919445435102" className="hover:text-burgundy">+91 94454 35102</a>
                   </p>
                 </div>
               </div>
@@ -167,7 +167,7 @@ export default function ContactForm() {
                 <div>
                   <h4 className="font-medium">Email</h4>
                   <p className="text-gray-600 mt-1">
-                    <a href="mailto:info@rebekha.com" className="hover:text-burgundy">info@rebekha.com</a>
+                    <a href="mailto:christonancy70@gmail.com" className="hover:text-burgundy">christonancy70@gmail.com</a>
                   </p>
                 </div>
               </div>

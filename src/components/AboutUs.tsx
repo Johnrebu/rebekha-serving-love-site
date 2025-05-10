@@ -23,7 +23,7 @@ export default function AboutUs() {
                 className="rounded-lg shadow-lg w-full h-[500px] object-cover"
               />
               <div className="absolute -bottom-8 -right-8 bg-burgundy text-white p-6 rounded-lg shadow-lg hidden md:block">
-                <p className="font-serif text-3xl">10+</p>
+                <p className="font-serif text-3xl">25+</p>
                 <p className="text-sm">Years of Excellence</p>
               </div>
             </div>
@@ -32,10 +32,10 @@ export default function AboutUs() {
           <div className="lg:pl-8">
             <h3 className="text-2xl font-serif font-semibold mb-4 text-burgundy">Our Passion for Food</h3>
             <p className="text-gray-700 mb-6">
-              Founded in 2012, Rebekha Caters began as a small family venture with a big vision: to create exceptional catering experiences that blend traditional flavors with modern culinary techniques. 
+              Founded in 1998, Rebekha Caters began as a small family venture with a big vision: to create exceptional catering experiences that blend traditional flavors with modern culinary techniques. 
             </p>
             <p className="text-gray-700 mb-6">
-              Our journey started in a modest kitchen in West Tambaram, where our founder, Rebekha Thomas, began crafting her signature dishes using recipes passed down through generations. Her commitment to quality and authentic flavors quickly gained recognition, and what started as catering for small family gatherings soon expanded to large-scale events.
+              Our journey started in a modest kitchen in West Tambaram, where our founder, Christopher Durairaj, began crafting his signature dishes using recipes passed down through generations. His commitment to quality and authentic flavors quickly gained recognition, and what started as catering for small family gatherings soon expanded to large-scale events.
             </p>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
