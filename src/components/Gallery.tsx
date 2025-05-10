@@ -10,7 +10,7 @@ type GalleryImage = {
   category: string;
 };
 
-// Sample gallery data
+// Enhanced gallery data with more food images
 const galleryImages: GalleryImage[] = [
   {
     id: "1",
@@ -59,6 +59,57 @@ const galleryImages: GalleryImage[] = [
     src: "https://images.unsplash.com/photo-1482275548304-a58859dc31b7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
     alt: "Corporate catering event",
     category: "Events"
+  },
+  // Additional vegetarian food images
+  {
+    id: "9",
+    src: "https://images.unsplash.com/photo-1631452180519-c014fe946bc7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80",
+    alt: "Vegetable curry",
+    category: "Cuisine"
+  },
+  {
+    id: "10",
+    src: "https://images.unsplash.com/photo-1596797038530-2c107aa4a186?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1975&q=80",
+    alt: "Vegan platter",
+    category: "Cuisine"
+  },
+  {
+    id: "11",
+    src: "https://images.unsplash.com/photo-1574484284002-952d92456975?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80",
+    alt: "Vegetable pulao",
+    category: "Cuisine"
+  },
+  // Additional non-vegetarian food images
+  {
+    id: "12",
+    src: "https://images.unsplash.com/photo-1589647363585-f4a7d3877b10?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80",
+    alt: "Grilled chicken",
+    category: "Cuisine"
+  },
+  {
+    id: "13",
+    src: "https://images.unsplash.com/photo-1603360946369-dc9bb6258143?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1935&q=80",
+    alt: "Tandoori chicken",
+    category: "Cuisine"
+  },
+  {
+    id: "14",
+    src: "https://images.unsplash.com/photo-1512058564366-18510be2db19?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1972&q=80",
+    alt: "Seafood platter",
+    category: "Cuisine"
+  },
+  // Additional dessert images
+  {
+    id: "15",
+    src: "https://images.unsplash.com/photo-1551024709-8f23befc6f87?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1957&q=80",
+    alt: "Assorted Indian sweets",
+    category: "Desserts"
+  },
+  {
+    id: "16",
+    src: "https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1980&q=80",
+    alt: "Chocolate cake",
+    category: "Desserts"
   }
 ];
 
@@ -71,12 +122,12 @@ export default function Gallery() {
     : galleryImages.filter(img => img.category === filter);
 
   return (
-    <section id="gallery" className="section-padding bg-white">
+    <section id="gallery" className="section-padding bg-white py-20">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <span className="text-burgundy font-medium">Visual Experience</span>
-          <h2 className="section-title">Our Gallery</h2>
-          <p className="section-subtitle mx-auto">
+          <h2 className="text-4xl font-serif font-bold mt-2 mb-4">Our Gallery</h2>
+          <p className="text-gray-600 max-w-2xl mx-auto">
             Take a visual journey through our culinary creations and catering events.
           </p>
         </div>

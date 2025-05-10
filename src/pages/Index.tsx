@@ -11,6 +11,9 @@ import ContactForm from '../components/ContactForm';
 import Footer from '../components/Footer';
 import BookingModal from '../components/BookingModal';
 
+// Add global styles for consistent section padding
+import '../styles/global.css';
+
 const Index = () => {
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
 

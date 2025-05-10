@@ -50,8 +50,11 @@ export default function Header({ onBookNowClick }: { onBookNowClick: () => void 
       <div className="container mx-auto px-4 md:px-6 flex items-center justify-between">
         <div className="flex items-center">
           <a href="#home" className="flex items-center">
-            <span className="font-serif text-burgundy text-2xl font-bold">Rebekha</span>
-            <span className="font-serif text-olive text-2xl ml-1">Caters</span>
+            <img 
+              src="/lovable-uploads/04b66b8c-af24-41ec-8bbd-4bb04d52c1c2.png" 
+              alt="Rebekha Caters Logo" 
+              className="h-14 w-auto"
+            />
           </a>
         </div>
 

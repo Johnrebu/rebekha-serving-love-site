@@ -1,0 +1,103 @@
+
+/* Global styles for the Rebekha Caters website */
+
+/* Section padding for consistent spacing */
+.section-padding {
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+}
+
+@media (min-width: 768px) {
+  .section-padding {
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .section-padding {
+    padding-top: 8rem;
+    padding-bottom: 8rem;
+  }
+}
+
+/* Section titles */
+.section-title {
+  font-size: 2rem;
+  font-weight: 700;
+  font-family: serif;
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+@media (min-width: 768px) {
+  .section-title {
+    font-size: 2.5rem;
+  }
+}
+
+/* Section subtitles */
+.section-subtitle {
+  font-size: 1rem;
+  color: #4b5563;
+  max-width: 32rem;
+}
+
+/* Color variables */
+:root {
+  --color-burgundy: #8B0000;
+  --color-olive: #556B2F;
+  --color-cream: #FEF7E4;
+}
+
+/* Button styles */
+.btn-primary {
+  background-color: var(--color-burgundy);
+  color: white;
+  padding: 0.5rem 1.5rem;
+  border-radius: 0.25rem;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: rgba(139, 0, 0, 0.9);
+}
+
+/* Background colors */
+.bg-burgundy {
+  background-color: var(--color-burgundy);
+}
+
+.bg-olive {
+  background-color: var(--color-olive);
+}
+
+.bg-cream {
+  background-color: var(--color-cream);
+}
+
+/* Text colors */
+.text-burgundy {
+  color: var(--color-burgundy);
+}
+
+.text-olive {
+  color: var(--color-olive);
+}
+
+/* Animation for items */
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

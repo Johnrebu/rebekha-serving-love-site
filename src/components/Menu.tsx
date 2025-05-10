@@ -14,7 +14,7 @@ type MenuItem = {
   isVeg: boolean;
 };
 
-// Sample menu data
+// Expanded menu data with more items
 const menuItems: MenuItem[] = [
   {
     id: "1",
@@ -70,6 +70,62 @@ const menuItems: MenuItem[] = [
     image: "https://images.unsplash.com/photo-1626500264797-26eda07ba72d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
     isVeg: false,
   },
+  // Additional vegetarian items
+  {
+    id: "7",
+    name: "Dal Makhani",
+    category: "Main Course",
+    description: "Creamy black lentils slow-cooked with butter and spices.",
+    price: "₹180",
+    image: "https://images.unsplash.com/photo-1626132647523-66d1b8f5a874?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+    isVeg: true,
+  },
+  {
+    id: "8",
+    name: "Palak Paneer",
+    category: "Main Course",
+    description: "Cottage cheese cubes in a pureed spinach gravy with aromatic spices.",
+    price: "₹210",
+    image: "https://images.unsplash.com/photo-1601050690597-df0568f70950?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    isVeg: true,
+  },
+  {
+    id: "9",
+    name: "Chole Bhature",
+    category: "Main Course",
+    description: "Spicy chickpea curry served with deep-fried bread.",
+    price: "₹190",
+    image: "https://images.unsplash.com/photo-1626777571937-68d5c9c8c8d7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1780&q=80",
+    isVeg: true,
+  },
+  // Additional non-vegetarian items
+  {
+    id: "10",
+    name: "Chicken Tikka Masala",
+    category: "Main Course",
+    description: "Grilled chicken pieces in a spiced curry sauce.",
+    price: "₹260",
+    image: "https://images.unsplash.com/photo-1588166524941-3bf61a9c41db?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1484&q=80",
+    isVeg: false,
+  },
+  {
+    id: "11",
+    name: "Mutton Rogan Josh",
+    category: "Main Course",
+    description: "Slow-cooked lamb in an aromatic Kashmiri chili-based gravy.",
+    price: "₹290",
+    image: "https://images.unsplash.com/photo-1568376794508-ae52c6ab3929?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+    isVeg: false,
+  },
+  {
+    id: "12",
+    name: "Prawn Curry",
+    category: "Main Course",
+    description: "Juicy prawns cooked in a flavorful coconut milk-based curry.",
+    price: "₹300",
+    image: "https://images.unsplash.com/photo-1613844237701-8f3664fc2eff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1964&q=80",
+    isVeg: false,
+  }
 ];
 
 export default function Menu() {
@@ -82,12 +138,12 @@ export default function Menu() {
       : menuItems.filter(item => !item.isVeg);
 
   return (
-    <section id="menu" className="section-padding bg-cream">
+    <section id="menu" className="section-padding bg-cream py-20">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <span className="text-burgundy font-medium">Delicious Options</span>
-          <h2 className="section-title">Our Menu</h2>
-          <p className="section-subtitle mx-auto">
+          <h2 className="text-4xl font-serif font-bold mt-2 mb-4">Our Menu</h2>
+          <p className="text-gray-600 max-w-2xl mx-auto">
             Explore our wide range of vegetarian and non-vegetarian delicacies, crafted with love and finest ingredients.
           </p>
         </div>
@@ -159,7 +215,7 @@ export default function Menu() {
           <p className="text-gray-600 mb-6">
             Explore our full menu options or request custom dishes for your special event.
           </p>
-          <Button className="btn-primary">
+          <Button className="bg-burgundy hover:bg-burgundy/90 text-white font-medium px-6 py-2">
             Download Full Menu
           </Button>
         </div>
