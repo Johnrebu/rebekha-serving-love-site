@@ -17,16 +17,9 @@ export default function Hero({ onBookNowClick }: { onBookNowClick: () => void })
 
       <div className="container mx-auto px-4 md:px-6 relative z-10 mt-16">
         <div className="max-w-3xl mx-auto text-center">
-          <div className="flex justify-center mb-6">
-            <img 
-              src="/lovable-uploads/04b66b8c-af24-41ec-8bbd-4bb04d52c1c2.png" 
-              alt="Rebekha Caters Logo" 
-              className="h-32 md:h-40 w-auto"
-            />
-          </div>
           <span className="bg-burgundy/90 text-white px-4 py-1 rounded-full text-sm font-medium">Premium Catering Services</span>
           <h1 className="mt-6 font-serif text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight">
-            Rebekha Caters
+            Rebekha Caterers
           </h1>
           <p className="mt-4 font-serif text-2xl md:text-3xl font-medium text-white italic">Serving Love</p>
           <p className="mt-8 text-lg text-white/90">

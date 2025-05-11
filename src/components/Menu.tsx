@@ -146,7 +146,7 @@ export default function Menu() {
       `${item.name} (${item.isVeg ? 'Veg' : 'Non-Veg'}) - ${item.price}\n${item.description}\n\n`
     ).join('');
 
-    const menuText = `REBEKHA CATERS MENU\n\n${menuContent}\n\nContact us: christonancy70@gmail.com | Phone: 9445435102`;
+    const menuText = `REBEKHA CATERERS MENU\n\n${menuContent}\n\nContact us: christonancy70@gmail.com | Phone: 9445435102`;
     
     // Convert text to blob
     const blob = new Blob([menuText], { type: 'text/plain' });
@@ -154,7 +154,7 @@ export default function Menu() {
     // Create download link
     const link = document.createElement('a');
     link.href = URL.createObjectURL(blob);
-    link.download = 'rebekha-caters-menu.txt';
+    link.download = 'rebekha-caterers-menu.txt';
     
     // Append to body, click and remove
     document.body.appendChild(link);

@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Phone, MapPin, Mail } from 'lucide-react';
 
@@ -11,7 +10,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
           {/* Company Info */}
           <div>
-            <h3 className="text-2xl font-serif font-bold mb-6">Rebekha Caters</h3>
+            <h3 className="text-2xl font-serif font-bold mb-6">Rebekha Caterers</h3>
             <p className="italic mb-4">"Serving Love"</p>
             <p className="text-gray-300 mb-6">
               We believe in creating unforgettable moments through exceptional food and service.
@@ -84,7 +83,7 @@ export default function Footer() {
         <hr className="border-gray-700 my-10" />
         
         <div className="text-center text-gray-400">
-          <p>© {currentYear} Rebekha Caters. All Rights Reserved.</p>
+          <p>© {currentYear} Rebekha Caterers. All Rights Reserved.</p>
           <p className="mt-2 text-sm">
             <a href="#" className="hover:text-white">Privacy Policy</a> | <a href="#" className="hover:text-white">Terms of Service</a>
           </p>
