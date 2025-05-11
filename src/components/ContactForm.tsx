@@ -5,9 +5,10 @@ import { Textarea } from "@/components/ui/textarea";
 import { Phone, Mail, MapPin, Clock } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
-
 export default function ContactForm() {
-  const { toast } = useToast();
+  const {
+    toast
+  } = useToast();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -15,35 +16,39 @@ export default function ContactForm() {
     subject: '',
     message: ''
   });
-  
   const [isSubmitting, setIsSubmitting] = useState(false);
-  
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    const {
+      name,
+      value
+    } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
   };
-  
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
     try {
       // Send email notification using the edge function
-      const { data, error } = await supabase.functions.invoke('send-email', {
+      const {
+        data,
+        error
+      } = await supabase.functions.invoke('send-email', {
         body: {
           type: 'contact',
           formData
         }
       });
-      
       if (error) throw new Error(error.message);
-      
+
       // Show success toast
       toast({
         title: "Message Sent!",
-        description: "Thank you for contacting us. We'll get back to you shortly.",
+        description: "Thank you for contacting us. We'll get back to you shortly."
       });
-      
+
       // Reset form
       setFormData({
         name: '',
@@ -63,9 +68,7 @@ export default function ContactForm() {
       setIsSubmitting(false);
     }
   };
-
-  return (
-    <section id="contact" className="section-padding bg-cream">
+  return <section id="contact" className="section-padding bg-cream">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <span className="text-burgundy font-medium">Get in Touch</span>
@@ -83,72 +86,28 @@ export default function ContactForm() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
-                  <Input
-                    id="name"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    placeholder="Enter your name"
-                    required
-                    className="w-full"
-                  />
+                  <Input id="name" name="name" value={formData.name} onChange={handleChange} placeholder="Enter your name" required className="w-full" />
                 </div>
                 <div>
                   <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
-                  <Input
-                    id="email"
-                    name="email"
-                    type="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    placeholder="Enter your email"
-                    required
-                    className="w-full"
-                  />
+                  <Input id="email" name="email" type="email" value={formData.email} onChange={handleChange} placeholder="Enter your email" required className="w-full" />
                 </div>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
-                  <Input
-                    id="phone"
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleChange}
-                    placeholder="Enter your phone number"
-                    className="w-full"
-                  />
+                  <Input id="phone" name="phone" value={formData.phone} onChange={handleChange} placeholder="Enter your phone number" className="w-full" />
                 </div>
                 <div>
                   <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-1">Subject</label>
-                  <Input
-                    id="subject"
-                    name="subject"
-                    value={formData.subject}
-                    onChange={handleChange}
-                    placeholder="What is this regarding?"
-                    className="w-full"
-                  />
+                  <Input id="subject" name="subject" value={formData.subject} onChange={handleChange} placeholder="What is this regarding?" className="w-full" />
                 </div>
               </div>
               <div>
                 <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">Message</label>
-                <Textarea
-                  id="message"
-                  name="message"
-                  value={formData.message}
-                  onChange={handleChange}
-                  placeholder="How can we help you?"
-                  rows={5}
-                  required
-                  className="w-full"
-                />
+                <Textarea id="message" name="message" value={formData.message} onChange={handleChange} placeholder="How can we help you?" rows={5} required className="w-full" />
               </div>
-              <Button 
-                type="submit" 
-                className="btn-primary w-full" 
-                disabled={isSubmitting}
-              >
+              <Button type="submit" className="btn-primary w-full" disabled={isSubmitting}>
                 {isSubmitting ? 'Sending...' : 'Send Message'}
               </Button>
             </form>
@@ -177,7 +136,9 @@ export default function ContactForm() {
                 <div>
                   <h4 className="font-medium">Phone</h4>
                   <p className="text-gray-600 mt-1">
-                    <a href="tel:+919445435102" className="hover:text-burgundy">+91 9445435102</a>
+                    <a href="tel:+919445435102" className="hover:text-burgundy">+91 9445435102
++91 8925477007
+                  </a>
                   </p>
                 </div>
               </div>
@@ -208,20 +169,12 @@ export default function ContactForm() {
             
             {/* Google Map */}
             <div className="rounded-lg overflow-hidden shadow-md h-64 mt-6">
-              <iframe 
-                title="Rebekha Caters Location"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3887.675379497844!2d80.10110287422997!3d12.992922814157047!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a52f76c4f84f375%3A0xc826cc4f8ce25bc8!2sTambaram%2C%20Chennai%2C%20Tamil%20Nadu!5e0!3m2!1sen!2sin!4v1697566500000!5m2!1sen!2sin" 
-                width="100%" 
-                height="100%" 
-                style={{ border: 0 }} 
-                allowFullScreen 
-                loading="lazy" 
-                referrerPolicy="no-referrer-when-downgrade"
-              />
+              <iframe title="Rebekha Caters Location" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3887.675379497844!2d80.10110287422997!3d12.992922814157047!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a52f76c4f84f375%3A0xc826cc4f8ce25bc8!2sTambaram%2C%20Chennai%2C%20Tamil%20Nadu!5e0!3m2!1sen!2sin!4v1697566500000!5m2!1sen!2sin" width="100%" height="100%" style={{
+              border: 0
+            }} allowFullScreen loading="lazy" referrerPolicy="no-referrer-when-downgrade" />
             </div>
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 }
