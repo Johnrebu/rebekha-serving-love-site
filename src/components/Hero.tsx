@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Button } from "@/components/ui/button";
 export default function Hero({
@@ -6,7 +7,7 @@ export default function Hero({
   onBookNowClick: () => void;
 }) {
   return <section id="home" className="relative min-h-screen flex items-center overflow-hidden">
-      {/* Background Image - Updated with a more stunning food-related background */}
+      {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <img src="https://images.unsplash.com/photo-1555244162-803834f70033?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Catering table" className="w-full h-full object-cover" />
         <div className="absolute inset-0 bg-black/60"></div>

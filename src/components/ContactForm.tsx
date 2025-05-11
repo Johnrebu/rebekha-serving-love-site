@@ -1,14 +1,14 @@
+
 import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Phone, Mail, MapPin, Clock } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
-import { supabase } from "@/integrations/supabase/client";
+import emailjs from 'emailjs-com';
+
 export default function ContactForm() {
-  const {
-    toast
-  } = useToast();
+  const { toast } = useToast();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -17,32 +17,39 @@ export default function ContactForm() {
     message: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const {
-      name,
-      value
-    } = e.target;
+    const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
       [name]: value
     }));
   };
+  
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
+    
     try {
-      // Send email notification using the edge function
-      const {
-        data,
-        error
-      } = await supabase.functions.invoke('send-email', {
-        body: {
-          type: 'contact',
-          formData
-        }
-      });
-      if (error) throw new Error(error.message);
-
+      // EmailJS configuration with your provided credentials
+      const templateParams = {
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone || 'Not provided',
+        subject: formData.subject || 'Website Inquiry',
+        message: formData.message
+      };
+      
+      // Send email using EmailJS
+      const response = await emailjs.send(
+        'service_4vlc0r7',  // Your Service ID
+        'template_eiiy98f', // Your Template ID
+        templateParams,
+        'ogQh6AcgQUAdLCNuG' // Your Public Key
+      );
+      
+      console.log('Email sent successfully:', response);
+      
       // Show success toast
       toast({
         title: "Message Sent!",
@@ -68,6 +75,7 @@ export default function ContactForm() {
       setIsSubmitting(false);
     }
   };
+
   return <section id="contact" className="section-padding bg-cream">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
@@ -113,7 +121,7 @@ export default function ContactForm() {
             </form>
           </div>
           
-          {/* Contact Information - Updated with correct email and phone */}
+          {/* Contact Information - Kept the same */}
           <div>
             <h3 className="font-serif text-2xl font-semibold mb-6 text-burgundy">Contact Information</h3>
             
@@ -169,7 +177,7 @@ export default function ContactForm() {
             
             {/* Google Map */}
             <div className="rounded-lg overflow-hidden shadow-md h-64 mt-6">
-              <iframe title="Rebekha Caters Location" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3887.675379497844!2d80.10110287422997!3d12.992922814157047!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a52f76c4f84f375%3A0xc826cc4f8ce25bc8!2sTambaram%2C%20Chennai%2C%20Tamil%20Nadu!5e0!3m2!1sen!2sin!4v1697566500000!5m2!1sen!2sin" width="100%" height="100%" style={{
+              <iframe title="Rebekha Caterers Location" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3887.675379497844!2d80.10110287422997!3d12.992922814157047!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a52f76c4f84f375%3A0xc826cc4f8ce25bc8!2sTambaram%2C%20Chennai%2C%20Tamil%20Nadu!5e0!3m2!1sen!2sin!4v1697566500000!5m2!1sen!2sin" width="100%" height="100%" style={{
               border: 0
             }} allowFullScreen loading="lazy" referrerPolicy="no-referrer-when-downgrade" />
             </div>

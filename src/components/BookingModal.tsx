@@ -1,20 +1,21 @@
-import { useState } from 'react';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
+
+import React, { useState } from 'react';
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
-import { supabase } from "@/integrations/supabase/client";
+import emailjs from 'emailjs-com';
 
-type BookingModalProps = {
+interface BookingModalProps {
   isOpen: boolean;
   onClose: () => void;
-};
+}
 
 export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
   const { toast } = useToast();
+  
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -27,36 +28,50 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
   });
   
   const [isSubmitting, setIsSubmitting] = useState(false);
-
+  
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
-
+  
   const handleSelectChange = (name: string, value: string) => {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
-  
-  const handleSubmit = async (e: React.FormEvent) => {
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
     
     try {
-      // Send email notification using the edge function
-      const { data, error } = await supabase.functions.invoke('send-email', {
-        body: {
-          type: 'booking',
-          formData
-        }
-      });
+      // Prepare template params for EmailJS
+      const templateParams = {
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        eventDate: formData.eventDate,
+        eventTime: formData.eventTime,
+        eventType: formData.eventType,
+        guestCount: formData.guestCount,
+        additionalInfo: formData.additionalInfo || 'No additional information provided'
+      };
       
-      if (error) throw new Error(error.message);
+      // Send booking email using EmailJS
+      const response = await emailjs.send(
+        'service_4vlc0r7', // Your Service ID
+        'template_eiiy98f', // Your Template ID - you may want to create a different template for bookings
+        templateParams,
+        'ogQh6AcgQUAdLCNuG' // Your Public Key
+      );
       
+      console.log('Booking request sent:', response);
+      
+      // Show success toast
       toast({
         title: "Booking Request Sent!",
-        description: "We will contact you shortly to confirm your booking details.",
+        description: "Thank you for your booking request. We'll contact you shortly to confirm the details."
       });
       
+      // Close the modal and reset form
       onClose();
       setFormData({
         name: '',
@@ -69,10 +84,10 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
         additionalInfo: ''
       });
     } catch (error) {
-      console.error("Error submitting booking:", error);
+      console.error("Error sending booking request:", error);
       toast({
         title: "Error",
-        description: "There was a problem submitting your booking. Please try again later.",
+        description: "There was a problem submitting your booking request. Please try again later.",
         variant: "destructive"
       });
     } finally {
