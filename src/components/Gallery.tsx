@@ -1,5 +1,14 @@
-import React, { useState } from 'react';
+
+import React, { useState, useEffect } from 'react';
 import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { 
+  Pagination, 
+  PaginationContent, 
+  PaginationItem, 
+  PaginationLink, 
+  PaginationNext, 
+  PaginationPrevious 
+} from "@/components/ui/pagination";
 
 // Gallery image type
 type GalleryImage = {
@@ -359,4 +368,189 @@ const galleryImages: GalleryImage[] = [
   // Additional Preparation images
   {
     id: "57",
-    src: "https://images.unsplash.com/photo-160056
+    src: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b",
+    alt: "Chef preparing ingredients",
+    category: "Preparation"
+  },
+  {
+    id: "58",
+    src: "https://images.unsplash.com/photo-1518770660439-4636190af475",
+    alt: "Kitchen preparation",
+    category: "Preparation"
+  },
+  {
+    id: "59",
+    src: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6",
+    alt: "Food preparation tools",
+    category: "Preparation"
+  },
+  {
+    id: "60",
+    src: "https://images.unsplash.com/photo-1649972904349-6e44c42644a7",
+    alt: "Chef preparing desserts",
+    category: "Preparation"
+  }
+];
+
+const Gallery = () => {
+  const [selectedImage, setSelectedImage] = useState<GalleryImage | null>(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [activeFilter, setActiveFilter] = useState<string | null>(null);
+  const imagesPerPage = 12;
+
+  // Handle filter change from side navigation
+  useEffect(() => {
+    const handleFilterChange = (e: Event) => {
+      const customEvent = e as CustomEvent;
+      setActiveFilter(customEvent.detail);
+      setCurrentPage(1); // Reset to first page when filter changes
+    };
+
+    window.addEventListener('filter-gallery', handleFilterChange as EventListener);
+    
+    return () => {
+      window.removeEventListener('filter-gallery', handleFilterChange as EventListener);
+    };
+  }, []);
+
+  const filteredImages = activeFilter 
+    ? galleryImages.filter(img => img.category === activeFilter)
+    : galleryImages;
+
+  // Calculate pagination
+  const indexOfLastImage = currentPage * imagesPerPage;
+  const indexOfFirstImage = indexOfLastImage - imagesPerPage;
+  const currentImages = filteredImages.slice(indexOfFirstImage, indexOfLastImage);
+  const totalPages = Math.ceil(filteredImages.length / imagesPerPage);
+
+  const paginate = (pageNumber: number) => {
+    if (pageNumber > 0 && pageNumber <= totalPages) {
+      setCurrentPage(pageNumber);
+    }
+  };
+
+  const openImageModal = (image: GalleryImage) => {
+    setSelectedImage(image);
+  };
+
+  const closeImageModal = () => {
+    setSelectedImage(null);
+  };
+
+  return (
+    <section id="gallery" className="py-20 bg-gray-50">
+      <div className="container mx-auto px-4">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl md:text-4xl font-serif mb-2 text-burgundy">Our Gallery</h2>
+          <p className="text-gray-600 max-w-2xl mx-auto">
+            {activeFilter 
+              ? `Viewing ${activeFilter} dishes - feast your eyes on our exquisite ${activeFilter.toLowerCase()} offerings` 
+              : 'Feast your eyes on our exquisite culinary creations and elegant event setups'}
+          </p>
+          
+          {activeFilter && (
+            <button 
+              className="mt-4 text-burgundy underline hover:text-burgundy/80"
+              onClick={() => setActiveFilter(null)}
+            >
+              Clear filter and show all images
+            </button>
+          )}
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          {currentImages.map((image) => (
+            <div 
+              key={image.id} 
+              className="relative overflow-hidden rounded-lg shadow-md group cursor-pointer h-64"
+              onClick={() => openImageModal(image)}
+            >
+              <img 
+                src={image.src} 
+                alt={image.alt}
+                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+              />
+              <div className="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+                <div className="p-4 w-full bg-gradient-to-t from-black/80 to-transparent">
+                  <p className="text-white text-sm">{image.alt}</p>
+                  <p className="text-white/70 text-xs">{image.category}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+        
+        {/* Pagination */}
+        {totalPages > 1 && (
+          <Pagination className="mt-12">
+            <PaginationContent>
+              <PaginationItem>
+                <PaginationPrevious 
+                  onClick={() => paginate(currentPage - 1)}
+                  className={currentPage === 1 ? 'pointer-events-none opacity-50' : ''}
+                />
+              </PaginationItem>
+              
+              {Array.from({ length: totalPages }, (_, i) => i + 1).map((number) => {
+                // Show limited page numbers with ellipsis
+                if (
+                  number === 1 ||
+                  number === totalPages ||
+                  (number >= currentPage - 1 && number <= currentPage + 1)
+                ) {
+                  return (
+                    <PaginationItem key={number}>
+                      <PaginationLink
+                        isActive={currentPage === number}
+                        onClick={() => paginate(number)}
+                      >
+                        {number}
+                      </PaginationLink>
+                    </PaginationItem>
+                  );
+                }
+                // Add ellipsis
+                if (number === currentPage - 2 || number === currentPage + 2) {
+                  return (
+                    <PaginationItem key={`ellipsis-${number}`}>
+                      <span className="flex h-9 w-5 items-center justify-center">...</span>
+                    </PaginationItem>
+                  );
+                }
+                return null;
+              })}
+              
+              <PaginationItem>
+                <PaginationNext 
+                  onClick={() => paginate(currentPage + 1)}
+                  className={currentPage === totalPages ? 'pointer-events-none opacity-50' : ''}
+                />
+              </PaginationItem>
+            </PaginationContent>
+          </Pagination>
+        )}
+      </div>
+
+      {/* Image Modal */}
+      <Dialog open={!!selectedImage} onOpenChange={() => selectedImage && closeImageModal()}>
+        <DialogContent className="sm:max-w-4xl bg-white p-0 overflow-hidden">
+          {selectedImage && (
+            <div>
+              <img 
+                src={selectedImage.src} 
+                alt={selectedImage.alt} 
+                className="w-full h-auto max-h-[80vh] object-contain"
+              />
+              <div className="p-6 bg-white">
+                <h3 className="text-lg font-medium">{selectedImage.alt}</h3>
+                <p className="text-gray-500">{selectedImage.category}</p>
+              </div>
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
+    </section>
+  );
+};
+
+export default Gallery;
