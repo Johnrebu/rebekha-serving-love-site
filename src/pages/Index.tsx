@@ -10,7 +10,8 @@ import Gallery from '../components/Gallery';
 import ContactForm from '../components/ContactForm';
 import Footer from '../components/Footer';
 import BookingModal from '../components/BookingModal';
-import { Toaster } from "@/components/ui/toaster"; // Import Toaster for notifications
+import { Toaster } from "@/components/ui/toaster";
+import SideNavigation from '../components/SideNavigation';
 
 // Add global styles for consistent section padding
 import '../styles/global.css';
@@ -27,21 +28,24 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen">
-      <Header onBookNowClick={handleOpenBookingModal} />
-      <Hero onBookNowClick={handleOpenBookingModal} />
-      <AboutUs />
-      <Menu />
-      <EventsServices onBookNowClick={handleOpenBookingModal} />
-      <Testimonials />
-      <Gallery />
-      <ContactForm />
-      <Footer />
-      <BookingModal 
-        isOpen={isBookingModalOpen} 
-        onClose={handleCloseBookingModal} 
-      />
-      <Toaster /> {/* Add the Toaster component for notifications */}
+    <div className="min-h-screen flex">
+      <SideNavigation onBookNowClick={handleOpenBookingModal} />
+      <div className="flex-1 overflow-x-hidden">
+        <Header onBookNowClick={handleOpenBookingModal} />
+        <Hero onBookNowClick={handleOpenBookingModal} />
+        <AboutUs />
+        <Menu />
+        <EventsServices onBookNowClick={handleOpenBookingModal} />
+        <Testimonials />
+        <Gallery />
+        <ContactForm />
+        <Footer />
+        <BookingModal 
+          isOpen={isBookingModalOpen} 
+          onClose={handleCloseBookingModal} 
+        />
+        <Toaster />
+      </div>
     </div>
   );
 };

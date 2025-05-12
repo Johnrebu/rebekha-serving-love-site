@@ -85,6 +85,10 @@
   p, a, li, button, input, textarea {
     @apply font-sans;
   }
+
+  html {
+    @apply scroll-smooth;
+  }
 }
 
 @layer components {
@@ -110,5 +114,9 @@
 
   .btn-outline {
     @apply border-2 border-burgundy text-burgundy font-medium px-6 py-3 rounded-md hover:bg-burgundy/10 transition duration-300;
+  }
+  
+  .image-caption {
+    @apply absolute bottom-4 right-4 bg-white/80 backdrop-blur-sm p-3 text-xs font-medium text-gray-900;
   }
 }
