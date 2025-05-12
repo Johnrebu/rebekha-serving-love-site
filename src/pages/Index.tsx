@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from '../components/Header';
 import Hero from '../components/Hero';
 import AboutUs from '../components/AboutUs';
@@ -18,6 +18,14 @@ import '../styles/global.css';
 
 const Index = () => {
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
+
+  useEffect(() => {
+    // Set the document title
+    document.title = "Rebekah Catering - Premium Food Services";
+    
+    // Scroll to top when page loads
+    window.scrollTo(0, 0);
+  }, []);
 
   const handleOpenBookingModal = () => {
     setIsBookingModalOpen(true);

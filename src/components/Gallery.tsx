@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 
@@ -110,118 +109,254 @@ const galleryImages: GalleryImage[] = [
     src: "https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1980&q=80",
     alt: "Chocolate cake",
     category: "Desserts"
-  }
-];
-
-export default function Gallery() {
-  const [selectedImage, setSelectedImage] = useState<GalleryImage | null>(null);
-  const [filter, setFilter] = useState("all");
-
-  const filteredImages = filter === "all" 
-    ? galleryImages 
-    : galleryImages.filter(img => img.category === filter);
-
-  return (
-    <section id="gallery" className="section-padding bg-white py-20">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
-          <span className="text-burgundy font-medium">Visual Experience</span>
-          <h2 className="text-4xl font-serif font-bold mt-2 mb-4">Our Gallery</h2>
-          <p className="text-gray-600 max-w-2xl mx-auto">
-            Take a visual journey through our culinary creations and catering events.
-          </p>
-        </div>
-
-        {/* Filter Buttons */}
-        <div className="flex flex-wrap justify-center gap-3 mb-10">
-          <button
-            onClick={() => setFilter("all")}
-            className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
-              filter === "all"
-                ? "bg-burgundy text-white"
-                : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-            }`}
-          >
-            All
-          </button>
-          <button
-            onClick={() => setFilter("Events")}
-            className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
-              filter === "Events"
-                ? "bg-burgundy text-white"
-                : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-            }`}
-          >
-            Events
-          </button>
-          <button
-            onClick={() => setFilter("Cuisine")}
-            className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
-              filter === "Cuisine"
-                ? "bg-burgundy text-white"
-                : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-            }`}
-          >
-            Cuisine
-          </button>
-          <button
-            onClick={() => setFilter("Preparation")}
-            className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
-              filter === "Preparation"
-                ? "bg-burgundy text-white"
-                : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-            }`}
-          >
-            Preparation
-          </button>
-          <button
-            onClick={() => setFilter("Desserts")}
-            className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
-              filter === "Desserts"
-                ? "bg-burgundy text-white"
-                : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-            }`}
-          >
-            Desserts
-          </button>
-        </div>
-
-        {/* Gallery Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-          {filteredImages.map((image) => (
-            <div 
-              key={image.id} 
-              className="relative overflow-hidden rounded-lg cursor-pointer group"
-              onClick={() => setSelectedImage(image)}
-            >
-              <img 
-                src={image.src} 
-                alt={image.alt}
-                className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
-                <div className="p-4 w-full">
-                  <span className="text-white font-medium">{image.alt}</span>
-                  <p className="text-white/70 text-sm">{image.category}</p>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* Image Viewer Dialog */}
-        <Dialog open={!!selectedImage} onOpenChange={() => setSelectedImage(null)}>
-          <DialogContent className="max-w-4xl p-0 bg-transparent border-none">
-            {selectedImage && (
-              <img 
-                src={selectedImage.src} 
-                alt={selectedImage.alt} 
-                className="w-full h-auto rounded-lg"
-              />
-            )}
-          </DialogContent>
-        </Dialog>
-      </div>
-    </section>
-  );
-}
+  },
+  // Additional Vegetarian dishes
+  {
+    id: "17",
+    src: "https://images.unsplash.com/photo-1623428187969-5da2dcea5ebf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    alt: "Vegetarian Buddha Bowl",
+    category: "Vegetarian"
+  },
+  {
+    id: "18",
+    src: "https://images.unsplash.com/photo-1543339308-43e59d6b73a6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    alt: "Vegetable Salad",
+    category: "Vegetarian"
+  },
+  {
+    id: "19",
+    src: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    alt: "Vegetarian Platter",
+    category: "Vegetarian"
+  },
+  {
+    id: "20",
+    src: "https://images.unsplash.com/photo-1598449426314-8b02525e8733?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    alt: "Paneer Tikka",
+    category: "Vegetarian"
+  },
+  {
+    id: "21",
+    src: "https://images.unsplash.com/photo-1561626423-a51b45aef0a1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    alt: "Dal Makhani",
+    category: "Vegetarian"
+  },
+  {
+    id: "22",
+    src: "https://images.unsplash.com/photo-1613844237802-3cfed8764e4c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    alt: "Vegetable Biryani",
+    category: "Vegetarian"
+  },
+  {
+    id: "23",
+    src: "https://images.unsplash.com/photo-1542224566-6e85f2e6772f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    alt: "Vegan Pasta",
+    category: "Vegetarian"
+  },
+  {
+    id: "24",
+    src: "https://images.unsplash.com/photo-1564834744159-ff0ea41ba4b9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    alt: "Vegetable Curry",
+    category: "Vegetarian"
+  },
+  {
+    id: "25",
+    src: "https://images.unsplash.com/photo-1510431198580-7727c9fa1e3a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    alt: "Vegan Sushi Rolls",
+    category: "Vegetarian"
+  },
+  {
+    id: "26",
+    src: "https://images.unsplash.com/photo-1623428187969-5da2dcea5ebf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    alt: "Stuffed Bell Peppers",
+    category: "Vegetarian"
+  },
+  {
+    id: "27",
+    src: "https://images.unsplash.com/photo-1604329760661-e71dc83f8f26?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    alt: "Vegetable Stir Fry",
+    category: "Vegetarian"
+  },
+  {
+    id: "28",
+    src: "https://images.unsplash.com/photo-1623855244183-52fd8d3ce2f7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    alt: "Mushroom Risotto",
+    category: "Vegetarian"
+  },
+  {
+    id: "29",
+    src: "https://images.unsplash.com/photo-1626200419199-391ae4a28ef6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    alt: "Vegan Tacos",
+    category: "Vegetarian"
+  },
+  {
+    id: "30",
+    src: "https://images.unsplash.com/photo-1511690656952-34342bb7c2f2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fA%3D%3D&auto=format&fit=crop&w=2064&q=80",
+    alt: "Vegetable Skewers",
+    category: "Vegetarian"
+  },
+  {
+    id: "31",
+    src: "https://images.unsplash.com/photo-1606756790138-261d2b21cd75?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80",
+    alt: "Eggplant Parmigiana",
+    category: "Vegetarian"
+  },
+  
+  // Additional Non-vegetarian dishes
+  {
+    id: "32",
+    src: "https://images.unsplash.com/photo-1432139555190-58524dae6a55?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2076&q=80",
+    alt: "Grilled Steak",
+    category: "Non-vegetarian"
+  },
+  {
+    id: "33",
+    src: "https://images.unsplash.com/photo-1598514983318-2f64f8f4796c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    alt: "Chicken Curry",
+    category: "Non-vegetarian"
+  },
+  {
+    id: "34",
+    src: "https://images.unsplash.com/photo-1626082895597-512255c3df58?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    alt: "Butter Chicken",
+    category: "Non-vegetarian"
+  },
+  {
+    id: "35",
+    src: "https://images.unsplash.com/photo-1606471191009-63994c53433b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    alt: "Roast Turkey",
+    category: "Non-vegetarian"
+  },
+  {
+    id: "36",
+    src: "https://images.unsplash.com/photo-1544025162-d76694265947?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80",
+    alt: "BBQ Ribs",
+    category: "Non-vegetarian"
+  },
+  {
+    id: "37",
+    src: "https://images.unsplash.com/photo-1565192259022-0427b058f372?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80",
+    alt: "Hamburger",
+    category: "Non-vegetarian"
+  },
+  {
+    id: "38",
+    src: "https://images.unsplash.com/photo-1614398751058-eb2e0bf63e53?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80",
+    alt: "Tandoori Chicken Platter",
+    category: "Non-vegetarian"
+  },
+  {
+    id: "39",
+    src: "https://images.unsplash.com/photo-1595777216528-071e0127ccbf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80",
+    alt: "Seafood Pasta",
+    category: "Non-vegetarian"
+  },
+  {
+    id: "40",
+    src: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    alt: "Salmon Fillet",
+    category: "Non-vegetarian"
+  },
+  {
+    id: "41",
+    src: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    alt: "Grilled Shrimp",
+    category: "Non-vegetarian"
+  },
+  {
+    id: "42",
+    src: "https://images.unsplash.com/photo-1595475038784-bbe439ff41e6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80",
+    alt: "Fish Curry",
+    category: "Non-vegetarian"
+  },
+  {
+    id: "43",
+    src: "https://images.unsplash.com/photo-1625937520353-011a091d8a33?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    alt: "Chicken Wings",
+    category: "Non-vegetarian"
+  },
+  {
+    id: "44",
+    src: "https://images.unsplash.com/photo-1573225342350-16731dd9bf83?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    alt: "Pork Roast",
+    category: "Non-vegetarian"
+  },
+  {
+    id: "45",
+    src: "https://images.unsplash.com/photo-1602538596792-a1a7331a5a66?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80",
+    alt: "Chicken Biryani",
+    category: "Non-vegetarian"
+  },
+  {
+    id: "46",
+    src: "https://images.unsplash.com/photo-1563805042-7684c019e1cb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2076&q=80",
+    alt: "Lamb Kebabs",
+    category: "Non-vegetarian"
+  },
+  
+  // Additional Desserts
+  {
+    id: "47",
+    src: "https://images.unsplash.com/photo-1602351447937-745cb720612f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fA%3D%3D&auto=format&fit=crop&w=1976&q=80",
+    alt: "Rasmalai",
+    category: "Desserts"
+  },
+  {
+    id: "48",
+    src: "https://images.unsplash.com/photo-1551024506-0bccd828d307?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fA%3D%3D&auto=format&fit=crop&w=1964&q=80",
+    alt: "Indian Sweet Platter",
+    category: "Desserts"
+  },
+  {
+    id: "49",
+    src: "https://images.unsplash.com/photo-1564591111131-48a75bf431cd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80",
+    alt: "Gulab Jamun",
+    category: "Desserts"
+  },
+  {
+    id: "50",
+    src: "https://images.unsplash.com/photo-1551024709-8f23befc6f87?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fA%3D%3D&auto=format&fit=crop&w=1957&q=80",
+    alt: "Assorted Indian Sweets",
+    category: "Desserts"
+  },
+  {
+    id: "51",
+    src: "https://images.unsplash.com/photo-1587314168485-3236d6710814?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fA%3D%3D&auto=format&fit=crop&w=1978&q=80",
+    alt: "Strawberry Cheesecake",
+    category: "Desserts"
+  },
+  {
+    id: "52",
+    src: "https://images.unsplash.com/photo-1586195831800-24f14c992cea?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80",
+    alt: "Mini Tart Selection",
+    category: "Desserts"
+  },
+  {
+    id: "53",
+    src: "https://images.unsplash.com/photo-1550617931-e17a7b70dce2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    alt: "Chocolate Mousse",
+    category: "Desserts"
+  },
+  {
+    id: "54",
+    src: "https://images.unsplash.com/photo-1551106652-a5bcf4b29ab6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fA%3D%3D&auto=format&fit=crop&w=2076&q=80",
+    alt: "Macarons",
+    category: "Desserts"
+  },
+  {
+    id: "55",
+    src: "https://images.unsplash.com/photo-1551024601-45c5f6a55613?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fA%3D%3D&auto=format&fit=crop&w=1950&q=80",
+    alt: "Kulfi",
+    category: "Desserts"
+  },
+  {
+    id: "56",
+    src: "https://images.unsplash.com/photo-1610726390560-39e9a6fa07ed?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80",
+    alt: "Chocolate Truffles",
+    category: "Desserts"
+  },
+  
+  // Additional Preparation images
+  {
+    id: "57",
+    src: "https://images.unsplash.com/photo-160056
