@@ -1,8 +1,9 @@
-
 import React, { useState } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
+import { Card, CardContent } from "@/components/ui/card";
+import { ChefHat, Pizza } from "lucide-react";
 
 // Menu item type
 type MenuItem = {
@@ -15,8 +16,9 @@ type MenuItem = {
   isVeg: boolean;
 };
 
-// Expanded menu data with more items
+// Expanded menu data with more items - now with 100 items total
 const menuItems: MenuItem[] = [
+  // Existing items (12 items)
   {
     id: "1",
     name: "Paneer Butter Masala",
@@ -71,7 +73,6 @@ const menuItems: MenuItem[] = [
     image: "https://images.unsplash.com/photo-1626500264797-26eda07ba72d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
     isVeg: false,
   },
-  // Additional vegetarian items
   {
     id: "7",
     name: "Dal Makhani",
@@ -87,7 +88,7 @@ const menuItems: MenuItem[] = [
     category: "Main Course",
     description: "Cottage cheese cubes in a pureed spinach gravy with aromatic spices.",
     price: "₹210",
-    image: "https://images.unsplash.com/photo-1601050690597-df0568f70950?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    image: "https://images.unsplash.com/photo-1601050690597-df0568f70950?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
     isVeg: true,
   },
   {
@@ -124,135 +125,303 @@ const menuItems: MenuItem[] = [
     category: "Main Course",
     description: "Juicy prawns cooked in a flavorful coconut milk-based curry.",
     price: "₹300",
-    image: "https://images.unsplash.com/photo-1613844237701-8f3664fc2eff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1964&q=80",
+    image: "https://images.unsplash.com/photo-1613844237701-8f3664fc2eff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fA%3D%3D&auto=format&fit=crop&w=1964&q=80",
     isVeg: false,
-  }
-];
-
-export default function Menu() {
-  const { toast } = useToast();
-  const [activeTab, setActiveTab] = useState("all");
+  },
   
-  const filteredMenu = activeTab === "all" 
-    ? menuItems 
-    : activeTab === "veg" 
-      ? menuItems.filter(item => item.isVeg) 
-      : menuItems.filter(item => !item.isVeg);
-
-  // Function to generate a simple PDF menu and trigger download
-  const handleDownloadMenu = () => {
-    // Create a simple text content for the PDF
-    const menuContent = menuItems.map(item => 
-      `${item.name} (${item.isVeg ? 'Veg' : 'Non-Veg'}) - ${item.price}\n${item.description}\n\n`
-    ).join('');
-
-    const menuText = `REBEKHA CATERERS MENU\n\n${menuContent}\n\nContact us: christonancy70@gmail.com | Phone: 9445435102`;
-    
-    // Convert text to blob
-    const blob = new Blob([menuText], { type: 'text/plain' });
-    
-    // Create download link
-    const link = document.createElement('a');
-    link.href = URL.createObjectURL(blob);
-    link.download = 'rebekha-caterers-menu.txt';
-    
-    // Append to body, click and remove
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    
-    toast({
-      title: "Menu Downloaded!",
-      description: "Thank you for downloading our full menu. Enjoy exploring our delicious offerings!",
-    });
-  };
-
-  return (
-    <section id="menu" className="section-padding bg-cream py-20">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
-          <span className="text-burgundy font-medium">Delicious Options</span>
-          <h2 className="text-4xl font-serif font-bold mt-2 mb-4">Our Menu</h2>
-          <p className="text-gray-600 max-w-2xl mx-auto">
-            Explore our wide range of vegetarian and non-vegetarian delicacies, crafted with love and finest ingredients.
-          </p>
-        </div>
-
-        <Tabs defaultValue="all" className="w-full max-w-3xl mx-auto mb-12">
-          <TabsList className="grid w-full grid-cols-3">
-            <TabsTrigger 
-              value="all" 
-              onClick={() => setActiveTab("all")}
-              className="text-lg"
-            >
-              All
-            </TabsTrigger>
-            <TabsTrigger 
-              value="veg" 
-              onClick={() => setActiveTab("veg")}
-              className="text-lg"
-            >
-              Vegetarian
-            </TabsTrigger>
-            <TabsTrigger 
-              value="nonveg" 
-              onClick={() => setActiveTab("nonveg")}
-              className="text-lg"
-            >
-              Non-Vegetarian
-            </TabsTrigger>
-          </TabsList>
-        </Tabs>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredMenu.map((item) => (
-            <div key={item.id} className="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
-              <div className="relative h-60">
-                <img 
-                  src={item.image} 
-                  alt={item.name} 
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute top-4 right-4 bg-white rounded-full p-1">
-                  {item.isVeg ? (
-                    <div className="w-5 h-5 border border-green-600 flex items-center justify-center rounded-full">
-                      <div className="w-3 h-3 bg-green-600 rounded-full"></div>
-                    </div>
-                  ) : (
-                    <div className="w-5 h-5 border border-red-600 flex items-center justify-center rounded-full">
-                      <div className="w-3 h-3 bg-red-600 rounded-full"></div>
-                    </div>
-                  )}
-                </div>
-              </div>
-              <div className="p-6">
-                <div className="flex justify-between items-start mb-2">
-                  <h3 className="font-serif font-bold text-xl">{item.name}</h3>
-                  <span className="font-serif font-bold text-burgundy">{item.price}</span>
-                </div>
-                <p className="text-gray-600 text-sm mb-4">{item.description}</p>
-                <div className="flex justify-between items-center">
-                  <span className="text-xs font-medium px-2 py-1 bg-olive/10 text-olive rounded-full">
-                    {item.category}
-                  </span>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-        
-        <div className="text-center mt-12">
-          <p className="text-gray-600 mb-6">
-            Explore our full menu options or request custom dishes for your special event.
-          </p>
-          <Button 
-            onClick={handleDownloadMenu}
-            className="bg-burgundy hover:bg-burgundy/90 text-white font-medium px-6 py-2"
-          >
-            Download Full Menu
-          </Button>
-        </div>
-      </div>
-    </section>
-  );
-}
+  // New Vegetarian items (adding 44 more)
+  {
+    id: "13",
+    name: "Pav Bhaji",
+    category: "Main Course",
+    description: "Mashed vegetable curry served with buttered bread rolls.",
+    price: "₹160",
+    image: "https://images.unsplash.com/photo-1606491956689-2ea866880c84?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1976&q=80",
+    isVeg: true,
+  },
+  {
+    id: "14",
+    name: "Chana Masala",
+    category: "Main Course",
+    description: "Spiced chickpeas cooked in a tomato and onion gravy.",
+    price: "₹170",
+    image: "https://images.unsplash.com/photo-1585937421612-70a008356fbe?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2036&q=80",
+    isVeg: true,
+  },
+  {
+    id: "15",
+    name: "Aloo Gobi",
+    category: "Main Course",
+    description: "Potato and cauliflower dish cooked with Indian spices.",
+    price: "₹160",
+    image: "https://images.unsplash.com/photo-1613292443284-8d10ef9ade34?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80",
+    isVeg: true,
+  },
+  {
+    id: "16",
+    name: "Vegetable Korma",
+    category: "Main Course",
+    description: "Mixed vegetables in a mild, creamy coconut-based sauce.",
+    price: "₹190",
+    image: "https://images.unsplash.com/photo-1631452180775-6964aa5d3d36?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80",
+    isVeg: true,
+  },
+  {
+    id: "17",
+    name: "Baingan Bharta",
+    category: "Main Course",
+    description: "Smoky eggplant mash cooked with onions, tomatoes and spices.",
+    price: "₹180",
+    image: "https://images.unsplash.com/photo-1601050690597-df0568f70950?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    isVeg: true,
+  },
+  {
+    id: "18",
+    name: "Rajma Masala",
+    category: "Main Course",
+    description: "Kidney beans in a thick, spiced gravy popular in North India.",
+    price: "₹170",
+    image: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1971&q=80",
+    isVeg: true,
+  },
+  {
+    id: "19",
+    name: "Veg Kadai",
+    category: "Main Course",
+    description: "Mixed vegetables in a spicy tomato and bell pepper gravy.",
+    price: "₹190",
+    image: "https://images.unsplash.com/photo-1505253716362-afaea1d3d1af?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80",
+    isVeg: true,
+  },
+  {
+    id: "20",
+    name: "Saag Paneer",
+    category: "Main Course",
+    description: "Cottage cheese cubes in a pureed spinach gravy.",
+    price: "₹210",
+    image: "https://images.unsplash.com/photo-1596797038530-2c107aa4a186?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1975&q=80",
+    isVeg: true,
+  },
+  {
+    id: "21",
+    name: "Paneer Tikka",
+    category: "Starters",
+    description: "Marinated cottage cheese cubes grilled in a tandoor.",
+    price: "₹220",
+    image: "https://images.unsplash.com/photo-1598449426314-8b02525e8733?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    isVeg: true,
+  },
+  {
+    id: "22",
+    name: "Gobi Manchurian",
+    category: "Starters",
+    description: "Crispy fried cauliflower tossed in a sweet and spicy sauce.",
+    price: "₹180",
+    image: "https://images.unsplash.com/photo-1604329760661-e71dc83f8f26?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    isVeg: true,
+  },
+  {
+    id: "23",
+    name: "Veg Spring Rolls",
+    category: "Starters",
+    description: "Crispy rolls filled with vegetables and served with dipping sauce.",
+    price: "₹160",
+    image: "https://images.unsplash.com/photo-1543339308-43e59d6b73a6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    isVeg: true,
+  },
+  {
+    id: "24",
+    name: "Veg Manchow Soup",
+    category: "Soups",
+    description: "Spicy and tangy soup with vegetables and crispy noodles.",
+    price: "₹120",
+    image: "https://images.unsplash.com/photo-1547592180-85f173990554?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80",
+    isVeg: true,
+  },
+  {
+    id: "25",
+    name: "Tomato Soup",
+    category: "Soups",
+    description: "Classic tomato soup garnished with cream and herbs.",
+    price: "₹100",
+    image: "https://images.unsplash.com/photo-1603105037880-880cd4edfb0d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80",
+    isVeg: true,
+  },
+  {
+    id: "26",
+    name: "Veg Fried Rice",
+    category: "Rice",
+    description: "Stir-fried rice with mixed vegetables and soy sauce.",
+    price: "₹160",
+    image: "https://images.unsplash.com/photo-1512058564366-18510be2db19?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1972&q=80",
+    isVeg: true,
+  },
+  {
+    id: "27",
+    name: "Jeera Rice",
+    category: "Rice",
+    description: "Basmati rice tempered with cumin seeds and herbs.",
+    price: "₹130",
+    image: "https://images.unsplash.com/photo-1516714435131-44d6b64dc6a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2080&q=80",
+    isVeg: true,
+  },
+  {
+    id: "28",
+    name: "Plain Naan",
+    category: "Breads",
+    description: "Soft leavened bread baked in tandoor.",
+    price: "₹40",
+    image: "https://images.unsplash.com/photo-1633377464980-1f195b4d2ccf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1972&q=80",
+    isVeg: true,
+  },
+  {
+    id: "29",
+    name: "Butter Naan",
+    category: "Breads",
+    description: "Soft leavened bread baked in tandoor and brushed with butter.",
+    price: "₹50",
+    image: "https://images.unsplash.com/photo-1596797038530-2c107aa4a186?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1975&q=80",
+    isVeg: true,
+  },
+  {
+    id: "30",
+    name: "Garlic Naan",
+    category: "Breads",
+    description: "Soft leavened bread baked in tandoor with garlic flavor.",
+    price: "₹60",
+    image: "https://images.unsplash.com/photo-1610725664285-7c57e6eeac3f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80",
+    isVeg: true,
+  },
+  {
+    id: "31",
+    name: "Veg Hakka Noodles",
+    category: "Chinese",
+    description: "Stir-fried noodles with vegetables in Chinese style.",
+    price: "₹170",
+    image: "https://images.unsplash.com/photo-1634864572865-1cf8ff39da05?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80",
+    isVeg: true,
+  },
+  {
+    id: "32",
+    name: "Veg Manchurian",
+    category: "Chinese",
+    description: "Vegetable balls in a spicy, sweet and sour sauce.",
+    price: "₹190",
+    image: "https://images.unsplash.com/photo-1593179241557-dc55b1629f7f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80",
+    isVeg: true,
+  },
+  {
+    id: "33",
+    name: "Veg Momos",
+    category: "Starters",
+    description: "Steamed dumplings filled with vegetables, served with spicy sauce.",
+    price: "₹140",
+    image: "https://images.unsplash.com/photo-1563245159-f793f19d8c37?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80",
+    isVeg: true,
+  },
+  {
+    id: "34",
+    name: "Veg Pulao",
+    category: "Rice",
+    description: "Fragrant rice cooked with mixed vegetables and mild spices.",
+    price: "₹170",
+    image: "https://images.unsplash.com/photo-1574484284002-952d92456975?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80",
+    isVeg: true,
+  },
+  {
+    id: "35",
+    name: "Veg Kathi Roll",
+    category: "Wraps",
+    description: "Paratha wrapped with spiced vegetables and chutneys.",
+    price: "₹150",
+    image: "https://images.unsplash.com/photo-1533630654593-b211770a9152?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80",
+    isVeg: true,
+  },
+  {
+    id: "36",
+    name: "Veg Grilled Sandwich",
+    category: "Sandwiches",
+    description: "Grilled sandwich with vegetables, cheese and chutneys.",
+    price: "₹130",
+    image: "https://images.unsplash.com/photo-1619860860774-1e2e14e33268?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80",
+    isVeg: true,
+  },
+  {
+    id: "37",
+    name: "Veg Cutlet",
+    category: "Starters",
+    description: "Crispy fried mixed vegetable patties served with chutney.",
+    price: "₹120",
+    image: "https://images.unsplash.com/photo-1603103774832-a73bfc93baf3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80",
+    isVeg: true,
+  },
+  {
+    id: "38",
+    name: "Vegetable Samosa",
+    category: "Starters",
+    description: "Crispy pastry filled with spiced potatoes and peas.",
+    price: "₹40",
+    image: "https://images.unsplash.com/photo-1601050690117-94f5f6fa8bd7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    isVeg: true,
+  },
+  {
+    id: "39",
+    name: "Masala Dosa",
+    category: "South Indian",
+    description: "Crispy rice crepe filled with spiced potatoes.",
+    price: "₹160",
+    image: "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80",
+    isVeg: true,
+  },
+  {
+    id: "40",
+    name: "Idli Sambar",
+    category: "South Indian",
+    description: "Steamed rice cakes served with lentil soup and coconut chutney.",
+    price: "₹120",
+    image: "https://images.unsplash.com/photo-1610192244261-3f33de3f72e1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80",
+    isVeg: true,
+  },
+  {
+    id: "41",
+    name: "Medu Vada",
+    category: "South Indian",
+    description: "Crispy lentil donuts served with sambar and coconut chutney.",
+    price: "₹130",
+    image: "https://images.unsplash.com/photo-1630383249896-479ebe6167cc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80",
+    isVeg: true,
+  },
+  {
+    id: "42",
+    name: "Upma",
+    category: "South Indian",
+    description: "Savory semolina porridge with vegetables and spices.",
+    price: "₹100",
+    image: "https://images.unsplash.com/photo-1622040806062-dd138f8e9d8f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80",
+    isVeg: true,
+  },
+  {
+    id: "43",
+    name: "Coconut Rice",
+    category: "Rice",
+    description: "Rice cooked with grated coconut and tempered with spices.",
+    price: "₹150",
+    image: "https://images.unsplash.com/photo-1658742474421-6f9a7e701001?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80",
+    isVeg: true,
+  },
+  {
+    id: "44",
+    name: "Lemon Rice",
+    category: "Rice",
+    description: "Rice flavored with lemon juice, nuts and tempered spices.",
+    price: "₹140",
+    image: "https://images.unsplash.com/photo-1596797038530-2c107aa4a186?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1975&q=80",
+    isVeg: true,
+  },
+  {
+    id: "45",
+    name: "Roti",
+    category: "Breads",
+    description: "Whole wheat flatbread cooked on tawa.",
+    price: "₹30",
+    image: "https://images.unsplash.com/photo-1619860860774-1e2e14e33268?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVuf
