@@ -4,7 +4,7 @@ import Header from '../components/Header';
 import Hero from '../components/Hero';
 import AboutUs from '../components/AboutUs';
 import Menu from '../components/Menu';
-import Services from '../components/Services';
+import EventsServices from '../components/EventsServices';
 import Testimonials from '../components/Testimonials';
 import Gallery from '../components/Gallery';
 import ContactForm from '../components/ContactForm';
@@ -36,14 +36,14 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen flex bg-navy">
+    <div className="min-h-screen flex">
       <SideNavigation onBookNowClick={handleOpenBookingModal} />
       <div className="flex-1 overflow-x-hidden">
         <Header onBookNowClick={handleOpenBookingModal} />
         <Hero onBookNowClick={handleOpenBookingModal} />
         <AboutUs />
-        <Services onBookNowClick={handleOpenBookingModal} />
         <Menu />
+        <EventsServices onBookNowClick={handleOpenBookingModal} />
         <Testimonials />
         <Gallery />
         <ContactForm />
