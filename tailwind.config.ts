@@ -33,6 +33,19 @@ export default {
                 navy: '#1D3557',
                 darkNavy: '#0F172A',
                 lightBlue: '#A8DADC',
+                // Adding vibrant colors
+                coral: '#FF6B6B',
+                teal: '#4ECDC4',
+                purple: '#6A0DAD',
+                emerald: '#50C878',
+                salmon: '#FA8072',
+                skyBlue: '#87CEEB',
+                amber: '#FFBF00',
+                fuschia: '#FF00FF',
+                lime: '#BFFF00',
+                peach: '#FFE5B4',
+                lavender: '#E6E6FA',
+                turquoise: '#40E0D0',
 				primary: {
 					DEFAULT: 'hsl(var(--primary))',
 					foreground: 'hsl(var(--primary-foreground))'
@@ -113,6 +126,14 @@ export default {
         'pulse-soft': {
           '0%, 100%': { opacity: '1' },
           '50%': { opacity: '0.7' }
+        },
+        'color-cycle': {
+          '0%, 100%': { backgroundPosition: '0% 50%' },
+          '50%': { backgroundPosition: '100% 50%' }
+        },
+        'rainbow-text': {
+          '0%': { backgroundPosition: '0% 50%' },
+          '100%': { backgroundPosition: '100% 50%' }
         }
 			},
 			animation: {
@@ -122,8 +143,16 @@ export default {
 				'scale-in': 'scale-in 0.3s ease-out',
 				'float': 'float 3s ease-in-out infinite',
         'shine': 'shine 3s linear infinite',
-        'pulse-soft': 'pulse-soft 2s ease-in-out infinite'
-			}
+        'pulse-soft': 'pulse-soft 2s ease-in-out infinite',
+        'color-cycle': 'color-cycle 8s linear infinite',
+        'rainbow-text': 'rainbow-text 5s linear infinite'
+			},
+      backgroundImage: {
+        'gradient-rainbow': 'linear-gradient(45deg, #FF6B6B, #FFD166, #06D6A0, #118AB2, #073B4C)',
+        'gradient-sunset': 'linear-gradient(to right, #FF8C42, #FD7014, #FF3E41, #D72483)',
+        'gradient-pastel': 'linear-gradient(to right, #E6E6FA, #FFE5B4, #E0FFFF, #FFF0F5)',
+        'gradient-neon': 'linear-gradient(to right, #08F7FE, #09FBD3, #FE53BB, #F5D300)',
+      }
 		}
 	},
 	plugins: [require("tailwindcss-animate")],

@@ -1,25 +1,31 @@
+
 import React from 'react';
 import { Phone, MapPin, Mail } from 'lucide-react';
+
 export default function Footer() {
   const currentYear = new Date().getFullYear();
-  return <footer className="bg-gray-900 text-white pt-16 pb-8">
+  return (
+    <footer className="bg-gradient-to-b from-gray-900 to-darkNavy text-white pt-16 pb-8 relative">
+      {/* Colorful decoration */}
+      <div className="absolute top-0 left-0 w-full h-2 bg-gradient-rainbow"></div>
+      
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
           {/* Company Info */}
           <div>
-            <h3 className="text-2xl font-serif font-bold mb-6">Rebekha Caterers</h3>
-            <p className="italic mb-4">"Serving Love"</p>
+            <h3 className="text-2xl font-serif font-bold mb-6 text-gradient-rainbow">Rebekha Caterers</h3>
+            <p className="italic mb-4 text-gold">"Serving Love"</p>
             <p className="text-gray-300 mb-6">
               We believe in creating unforgettable moments through exceptional food and service.
             </p>
             <div className="flex items-center space-x-4">
-              <a href="#" className="text-white hover:text-burgundy">
+              <a href="#" className="text-teal hover:text-coral transition-all duration-300 transform hover:scale-110">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-facebook"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" /></svg>
               </a>
-              <a href="#" className="text-white hover:text-burgundy">
+              <a href="#" className="text-purple hover:text-coral transition-all duration-300 transform hover:scale-110">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-instagram"><rect width="20" height="20" x="2" y="2" rx="5" ry="5" /><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" /><line x1="17.5" x2="17.51" y1="6.5" y2="6.5" /></svg>
               </a>
-              <a href="#" className="text-white hover:text-burgundy">
+              <a href="#" className="text-skyBlue hover:text-coral transition-all duration-300 transform hover:scale-110">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-twitter"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z" /></svg>
               </a>
             </div>
@@ -27,48 +33,48 @@ export default function Footer() {
           
           {/* Quick Links */}
           <div>
-            <h3 className="text-xl font-serif font-semibold mb-6">Quick Links</h3>
+            <h3 className="text-xl font-serif font-semibold mb-6 text-gradient-teal">Quick Links</h3>
             <ul className="space-y-3">
               <li>
-                <a href="#home" className="text-gray-300 hover:text-white transition-colors">Home</a>
+                <a href="#home" className="text-gray-300 hover:text-coral transition-colors animated-underline">Home</a>
               </li>
               <li>
-                <a href="#about" className="text-gray-300 hover:text-white transition-colors">About Us</a>
+                <a href="#about" className="text-gray-300 hover:text-teal transition-colors animated-underline">About Us</a>
               </li>
               <li>
-                <a href="#menu" className="text-gray-300 hover:text-white transition-colors">Our Menu</a>
+                <a href="#menu" className="text-gray-300 hover:text-purple transition-colors animated-underline">Our Menu</a>
               </li>
               <li>
-                <a href="#services" className="text-gray-300 hover:text-white transition-colors">Events & Services</a>
+                <a href="#services" className="text-gray-300 hover:text-amber transition-colors animated-underline">Events & Services</a>
               </li>
               <li>
-                <a href="#testimonials" className="text-gray-300 hover:text-white transition-colors">Testimonials</a>
+                <a href="#testimonials" className="text-gray-300 hover:text-skyBlue transition-colors animated-underline">Testimonials</a>
               </li>
               <li>
-                <a href="#gallery" className="text-gray-300 hover:text-white transition-colors">Gallery</a>
+                <a href="#gallery" className="text-gray-300 hover:text-fuschia transition-colors animated-underline">Gallery</a>
               </li>
               <li>
-                <a href="#contact" className="text-gray-300 hover:text-white transition-colors">Contact Us</a>
+                <a href="#contact" className="text-gray-300 hover:text-lime transition-colors animated-underline">Contact Us</a>
               </li>
             </ul>
           </div>
           
           {/* Contact Info - Updated email and phone */}
           <div>
-            <h3 className="text-xl font-serif font-semibold mb-6">Contact Us</h3>
+            <h3 className="text-xl font-serif font-semibold mb-6 text-gradient-coral">Contact Us</h3>
             <ul className="space-y-4">
-              <li className="flex items-start">
-                <MapPin className="mr-3 h-6 w-6 text-burgundy" />
+              <li className="flex items-start group">
+                <MapPin className="mr-3 h-6 w-6 text-teal group-hover:text-coral transition-colors" />
                 <span className="text-gray-300">No.19, Perumal Kovil Street, Irumbuliyur, West Tambaram, Chennai-45</span>
               </li>
-              <li className="flex items-center">
-                <Phone className="mr-3 h-6 w-6 text-burgundy" />
-                <a href="tel:+919445435102" className="text-gray-300 hover:text-white transition-colors">+91 9445435102
+              <li className="flex items-center group">
+                <Phone className="mr-3 h-6 w-6 text-purple group-hover:text-teal transition-colors" />
+                <a href="tel:+919445435102" className="text-gray-300 hover:text-coral transition-colors">+91 9445435102
 +91 8925477007</a>
               </li>
-              <li className="flex items-center">
-                <Mail className="mr-3 h-6 w-6 text-burgundy" />
-                <a href="mailto:christonancy70@gmail.com" className="text-gray-300 hover:text-white transition-colors">
+              <li className="flex items-center group">
+                <Mail className="mr-3 h-6 w-6 text-amber group-hover:text-purple transition-colors" />
+                <a href="mailto:christonancy70@gmail.com" className="text-gray-300 hover:text-teal transition-colors">
                   christonancy70@gmail.com
                 </a>
               </li>
@@ -81,9 +87,10 @@ export default function Footer() {
         <div className="text-center text-gray-400">
           <p>© {currentYear} Rebekha Caterers. All Rights Reserved.</p>
           <p className="mt-2 text-sm">
-            <a href="#" className="hover:text-white">Privacy Policy</a> | <a href="#" className="hover:text-white">Terms of Service</a>
+            <a href="#" className="hover:text-teal transition-colors">Privacy Policy</a> | <a href="#" className="hover:text-coral transition-colors">Terms of Service</a>
           </p>
         </div>
       </div>
-    </footer>;
+    </footer>
+  );
 }

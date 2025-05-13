@@ -51,7 +51,7 @@ export default function Hero({
         <div className="flex flex-col justify-center px-6 md:px-12 lg:px-16 py-16 lg:py-0 order-2 lg:order-1 bg-navy relative z-10">
           <div className="max-w-xl relative z-10">
             <motion.span 
-              className="uppercase tracking-widest text-sm font-medium text-gold"
+              className="uppercase tracking-widest text-sm font-medium text-coral"
               custom={0}
               variants={textVariants}
               initial="hidden"
@@ -67,11 +67,11 @@ export default function Hero({
               initial="hidden"
               animate="visible"
             >
-              <span className="animated-text">Rebekha</span> Caterers
+              <span className="text-gradient-rainbow">Rebekha</span> Caterers
             </motion.h1>
             
             <motion.p 
-              className="mt-6 text-lg text-blue-100"
+              className="mt-6 text-lg text-skyBlue"
               custom={2}
               variants={textVariants}
               initial="hidden"
@@ -90,7 +90,7 @@ export default function Hero({
               <motion.div whileHover="hover" variants={buttonVariants}>
                 <Button 
                   onClick={onBookNowClick} 
-                  className="bg-gold hover:bg-gold/90 text-navy font-medium px-8 py-6 text-lg animated-button"
+                  className="bg-coral hover:bg-salmon text-white font-medium px-8 py-6 text-lg animated-button"
                 >
                   Book Your Event
                 </Button>
@@ -99,7 +99,7 @@ export default function Hero({
               <motion.div whileHover="hover" variants={buttonVariants}>
                 <Button 
                   variant="outline" 
-                  className="border-2 border-gold text-gold hover:bg-gold/10 px-8 py-6 text-lg font-medium"
+                  className="border-2 border-teal text-teal hover:bg-teal/10 px-8 py-6 text-lg font-medium"
                   onClick={() => document.getElementById('menu')?.scrollIntoView({
                     behavior: 'smooth'
                   })}
@@ -112,14 +112,14 @@ export default function Hero({
           
           {/* Background elements */}
           <motion.div 
-            className="absolute -bottom-20 -left-20 w-64 h-64 rounded-full bg-gold/5 blur-3xl"
+            className="absolute -bottom-20 -left-20 w-64 h-64 rounded-full bg-teal/10 blur-3xl"
             initial={{ opacity: 0 }}
             animate={{ opacity: 0.6 }}
             transition={{ delay: 1, duration: 1 }}
           />
           
           <motion.div 
-            className="absolute top-20 -right-32 w-64 h-64 rounded-full bg-blue-500/5 blur-3xl"
+            className="absolute top-20 -right-32 w-64 h-64 rounded-full bg-coral/10 blur-3xl"
             initial={{ opacity: 0 }}
             animate={{ opacity: 0.4 }}
             transition={{ delay: 1.2, duration: 1 }}
@@ -142,12 +142,12 @@ export default function Hero({
           </motion.div>
           
           <motion.div 
-            className="absolute bottom-8 right-8 bg-navy/80 backdrop-blur-md p-4 rounded-md"
+            className="absolute bottom-8 right-8 bg-navy/80 backdrop-blur-md p-4 rounded-md border-l-4 border-coral"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1, duration: 0.6 }}
           >
-            <span className="block text-xs text-gold font-medium">01 / 04</span>
+            <span className="block text-xs text-teal font-medium">01 / 04</span>
             <span className="block text-sm font-medium text-white mt-1">SIGNATURE CUISINE</span>
           </motion.div>
         </div>
@@ -169,7 +169,7 @@ export default function Hero({
           }
         }}
       >
-        <a href="#about" className="flex flex-col items-center text-gold hover:text-gold/80 transition-colors" aria-label="Scroll Down">
+        <a href="#about" className="flex flex-col items-center text-teal hover:text-coral transition-colors" aria-label="Scroll Down">
           <span className="text-sm mb-2">Scroll</span>
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <path d="M12 5v14M5 12l7 7 7-7" />
