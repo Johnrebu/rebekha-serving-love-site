@@ -29,6 +29,7 @@ export default {
                 burgundy: '#7D1935',
                 olive: '#556B2F',
                 gold: '#D4AF37',
+                navy: '#0A0E1F',
                 softcream: '#FFF8E7',
 				primary: {
 					DEFAULT: 'hsl(var(--primary))',

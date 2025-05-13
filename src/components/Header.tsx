@@ -14,7 +14,7 @@ const NavLink = ({ href, children, onClick }: NavLinkProps) => {
     <a 
       href={href} 
       onClick={onClick}
-      className="text-gray-800 hover:text-burgundy transition-colors duration-300 font-medium uppercase tracking-wider text-sm"
+      className="text-gold hover:text-white transition-colors duration-300 font-medium uppercase tracking-wider text-sm"
     >
       {children}
     </a>
@@ -46,11 +46,11 @@ export default function Header({ onBookNowClick }: { onBookNowClick: () => void 
   };
 
   return (
-    <header className={`lg:hidden fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-white shadow-md py-2' : 'bg-transparent py-4'}`}>
+    <header className={`lg:hidden fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-navy/95 backdrop-blur-sm shadow-md py-2' : 'bg-transparent py-4'}`}>
       <div className="container mx-auto px-4 md:px-6 flex items-center justify-between">
         <div className="flex items-center">
           <a href="#home" className="flex items-center">
-            <div className="w-10 h-10 flex items-center justify-center bg-burgundy text-white font-serif text-lg">
+            <div className="w-10 h-10 flex items-center justify-center bg-gold text-navy font-serif text-lg">
               R
             </div>
           </a>
@@ -63,6 +63,7 @@ export default function Header({ onBookNowClick }: { onBookNowClick: () => void 
             size="icon" 
             onClick={toggleMenu}
             aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+            className="text-gold hover:text-white"
           >
             {isMenuOpen ? <X /> : <Menu />}
           </Button>
@@ -71,12 +72,12 @@ export default function Header({ onBookNowClick }: { onBookNowClick: () => void 
 
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="lg:hidden bg-white absolute top-16 left-0 right-0 shadow-md animate-fade-in">
+        <div className="lg:hidden bg-navy/95 backdrop-blur-sm absolute top-16 left-0 right-0 shadow-md animate-fade-in">
           <div className="container mx-auto px-4 py-6 flex flex-col space-y-4">
             <NavLink href="#home" onClick={closeMenu}>Home</NavLink>
             <NavLink href="#about" onClick={closeMenu}>About</NavLink>
-            <NavLink href="#menu" onClick={closeMenu}>Cuisine</NavLink>
             <NavLink href="#services" onClick={closeMenu}>Services</NavLink>
+            <NavLink href="#menu" onClick={closeMenu}>Cuisine</NavLink>
             <NavLink href="#gallery" onClick={closeMenu}>Gallery</NavLink>
             <NavLink href="#contact" onClick={closeMenu}>Contact</NavLink>
             <Button 
@@ -84,7 +85,7 @@ export default function Header({ onBookNowClick }: { onBookNowClick: () => void 
                 onBookNowClick();
                 closeMenu();
               }} 
-              className="bg-burgundy hover:bg-burgundy/90 text-white w-full"
+              className="border border-gold bg-transparent hover:bg-gold text-gold hover:text-navy uppercase tracking-wider"
             >
               Book Now
             </Button>
