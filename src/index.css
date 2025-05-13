@@ -75,7 +75,11 @@
   }
 
   body {
-    @apply bg-cream text-foreground;
+    @apply bg-navy text-foreground antialiased;
+    background-image: 
+      radial-gradient(at 20% 25%, rgba(21, 40, 63, 0.7) 0px, transparent 50%),
+      radial-gradient(at 80% 85%, rgba(33, 56, 85, 0.6) 0px, transparent 50%);
+    background-attachment: fixed;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -93,30 +97,147 @@
 
 @layer components {
   .section-padding {
-    @apply py-16 md:py-24;
+    @apply py-20 md:py-28 relative;
   }
 
   .section-title {
-    @apply text-3xl md:text-4xl font-serif font-bold text-burgundy mb-6;
+    @apply text-3xl md:text-4xl font-serif font-bold text-gold mb-6 relative;
   }
 
   .section-subtitle {
-    @apply text-lg md:text-xl text-olive/80 mb-12 max-w-2xl mx-auto;
+    @apply text-lg md:text-xl text-blue-300/80 mb-12 max-w-2xl mx-auto;
   }
 
   .btn-primary {
-    @apply bg-burgundy text-white font-medium px-6 py-3 rounded-md shadow-md hover:bg-burgundy/90 transition duration-300;
+    @apply bg-gold text-navy font-medium px-6 py-3 rounded-md shadow-md hover:bg-gold/90 transition-all duration-300;
   }
 
   .btn-secondary {
-    @apply bg-olive text-white font-medium px-6 py-3 rounded-md shadow-md hover:bg-olive/90 transition duration-300;
+    @apply bg-navy text-white font-medium px-6 py-3 rounded-md shadow-md hover:bg-navy/90 transition-all duration-300;
   }
 
   .btn-outline {
-    @apply border-2 border-burgundy text-burgundy font-medium px-6 py-3 rounded-md hover:bg-burgundy/10 transition duration-300;
+    @apply border-2 border-gold text-gold font-medium px-6 py-3 rounded-md transition-all duration-300 hover:bg-gold hover:text-navy;
   }
   
   .image-caption {
-    @apply absolute bottom-4 right-4 bg-white/80 backdrop-blur-sm p-3 text-xs font-medium text-gray-900;
+    @apply absolute bottom-4 right-4 bg-navy/80 backdrop-blur-sm p-3 text-xs font-medium text-white;
+  }
+
+  /* Modern button animation */
+  .animated-button {
+    @apply relative inline-flex overflow-hidden rounded-md;
+  }
+
+  .animated-button::before {
+    content: '';
+    @apply absolute inset-0 bg-gold/20 transform -translate-x-full transition-transform duration-300;
+  }
+
+  .animated-button:hover::before {
+    @apply transform translate-x-0;
+  }
+
+  /* Text animation */
+  .animated-text {
+    background: linear-gradient(to right, #D4AF37, #FFF, #D4AF37);
+    background-size: 200% auto;
+    color: #000;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shine 3s linear infinite;
+  }
+  
+  @keyframes shine {
+    to {
+      background-position: 200% center;
+    }
+  }
+
+  /* Card hover effect */
+  .hover-card {
+    @apply transition-all duration-300;
+  }
+  
+  .hover-card:hover {
+    @apply transform -translate-y-2 shadow-xl;
+  }
+  
+  /* Animated underline */
+  .animated-underline {
+    @apply relative;
+  }
+  
+  .animated-underline::after {
+    content: '';
+    @apply absolute left-0 bottom-0 w-0 h-0.5 bg-gold transition-all duration-300;
+  }
+  
+  .animated-underline:hover::after {
+    @apply w-full;
+  }
+  
+  /* Reveal animation */
+  .reveal-animation {
+    clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+    transition: clip-path 1s ease;
+  }
+  
+  .reveal-animation.revealed {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  }
+
+  /* Glass card */
+  .glass-card {
+    @apply bg-white/5 backdrop-blur-sm border border-white/10 shadow-lg;
+  }
+}
+
+@layer utilities {
+  /* Animation utilities */
+  .transition-all-slow {
+    @apply transition-all duration-700;
+  }
+  
+  .transition-transform-slow {
+    @apply transition-transform duration-700;
+  }
+  
+  .scale-hover {
+    @apply hover:scale-105 transition-transform duration-300;
+  }
+  
+  .rotate-hover {
+    @apply hover:rotate-3 transition-transform duration-300;
+  }
+
+  .fade-in {
+    animation: fadeIn 0.5s ease-out forwards;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .slide-in-right {
+    animation: slideInRight 0.5s ease-out forwards;
+  }
+  
+  @keyframes slideInRight {
+    from {
+      opacity: 0;
+      transform: translateX(50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
   }
 }
